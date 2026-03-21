@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Staff</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: add staff, search staff (w filters), edit staff info, remove staff, view staff treatment history-->
+    <body>
+        <header>
+            <h1>Staff Directory</h1>
+            <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
+        </header>
+        <main>
+            <!--for adding a new patient-->
+            <button class="add-button" onclick="location.href='staffform.html';">Add Patient</button>
+            <div id="search-form">
+                <form methord="post">
+                    <p>Search: </p>
+                    <div class="search-field">
+                        <label for="empid">Employee ID:</label><br>
+                        <input type="text" id="empid" name="empid" value="e.g. 2">
+                    </div>
+                    <div class="search-field">
+                        <label for="Name">Name:</label><br>
+                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                    </div>
+                    <div class="search-field">
+                        <label for="address">Address:</label><br>
+                        <input type="text" id="address" name="address" value="e.g. 123 Main St">
+                    </div>
+                    <div class="search-field">
+                        <label for="title">Title:</label><br>
+                        <input type="text" id="title" name="title" value="e.g. Director of Medicine">
+                    </div>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <div id="filter-form">
+                <form method="post">
+                    <p>Filter: </p>
+                    <div class="filter-field">
+                        <label for="role">Role:</label><br>
+                        <select id="role" name="role">
+                            <option value="doctor">Doctor</option>
+                            <option value="nurse">Nurse</option>
+                            <option value="surgeon">Surgeon</option>
+                        </select>
+                    </div>   
+                    <div class="filter-field">
+                        <label for="deptid">Department (ID):</label><br>
+                        <input type="text" id="deptid" name="deptid" value="e.g. 2">
+                    </div>
+                    <div class="filter-field">
+                        <label for="deptName">Department (Name):</label><br>
+                        <input type="text" id="deptName" name="deptName" value="e.g. Primary Care">
+                    </div>
+                    </div>
+                    <div class="filter-field">
+                        <label for="special">Specialization:</label><br>
+                        <input type="text" id="special" name="special" value="e.g. Paediatrics">
+                    </div>       
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+            <div id="results">
+                <p>Results: </p>
+                <table id="results-table">
+                    <tr>
+                        <th>EmpID</th>
+                        <th>Name</th>
+                        <th>Role</th> 
+                        <th>Specialization</th>
+                        <th>Address</th>
+                        <th>Department</th>
+                        <th class="treatments">View Treatments</th> <!--for treatments button-->
+                        <th class="update">Update</th> <!--for update button-->
+                        <th class="delete">Delete</th> <!--for delete button-->
+                    </tr>
+                    <!--organization of a single row (to be revised when interaction is added)-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="treatments"><button class="ptreatment-button">View Treatments</button></td>
+                        <td class="update"><button class="update-button" onclick="location.href='patientform.html';">Update</button></td>
+                        <td class="delete"><button class="delete-button">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </body>
+</html>
