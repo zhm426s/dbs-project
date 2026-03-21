@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Treatments</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: order treatment, search treatment records (w filters), edit treatment record, edit test results, remove test record-->
+    <body>
+        <header>
+            <h1>Treatment Directory</h1>
+            <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
+        </header>
+        <main>
+            <div id="actions">
+                <!--for ordering a new treatment-->
+                <button class="add-button" onclick="location.href='treatmentform.html';">Order New Treatment</button>
+                <button class="add-button" onclick="location.href='resultform.html';">Input Test Results</button>
+            </div>
+            <div id="search-form">
+                <form method="post">
+                    <p>Search: </p>
+                    <div class="search-field">
+                        <label for="ssn">Patient SSN:</label><br>
+                        <input type="password" id="ssn" name="ssn">
+                    </div>
+                    <div class="search-field">
+                        <label for="Name">Patient Name:</label><br>
+                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                    </div>
+                    <div class="search-field">
+                        <label for="treatid">Treatment ID:</label><br>
+                        <input type="text" id="treatid" name="treatid" value="e.g. 2">
+                    </div>
+                    <div class="search-field">
+                        <label for="orderer">Ordering Doctor ID:</label><br>
+                        <input type="text" id="orderer" name="orderer" value="e.g. John, Doe, John Doe">
+                    </div>
+                    <div class="search-field">
+                        <label for="med">(Prescription) Medication:</label><br>
+                        <input type="text" id="med" name="med" value="e.g. Ibuprofen">
+                    </div>
+                    <div class="search-field">
+                        <label for="testType">(Test) Type:</label><br>
+                        <input type="text" id="testType" name="testType" value="e.g. X-Ray">
+                    </div>
+                    <div class="search-field">
+                        <label for="testResult">(Test) Has Results:</label><br>
+                        <input type="radio" id="yesresults" name="testResult" value="Yes">
+                        <label for="yesresults">Yes</label><br>
+                        <input type="radio" id="noresults" name="testResult" value="No">
+                        <label for="noresults">No</label><br>
+                        <input type="radio" id="either" name="testResult" value="">
+                        <label for="either">Show All</label>
+                    </div>
+                    <div class="search-field">
+                        <label for="surgeon">(Surgery) Surgeon ID:</label><br>
+                        <input type="text" id="surgeon" name="surgeon" value="e.g. 2">
+                    </div>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <div id="filter-form">
+                <form method="post">
+                    <p>Filter: </p>
+                    <div class="filter-field">
+                        <label for="type">Treatment Type:</label><br>
+                        <select id="type" name="type">
+                            <option value="test">Test</option>
+                            <option value="prescription">Prescription</option>
+                            <option value="surgery">Surgery</option>
+                        </select>
+                    </div>     
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+            <div id="results">
+                <p>Results: </p>
+                <table id="results-table">
+                    <tr>
+                        <th>Treatment ID</th>
+                        <th>Type</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Ordering Doctor Name</th>
+                        <th>Prescription Details</th> <!--Medication, Dosage at Unit, Frequency-->
+                        <th>Test Details</th> <!--Type, Analyte-->
+                        <th>Test Results</th> 
+                        <th>Surgery Details</th> <!--Body Location, Surgeon Name-->
+                        <th class="update">Update</th> <!--for update button-->
+                        <th class="delete">Delete</th> <!--for delete button-->
+                    </tr>
+                    <!--organization of a single row (to be revised when interaction is added)-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="update"><button class="update-button" onclick="location.href='treatmentform.html';">Update</button></td>
+                        <td class="delete"><button class="delete-button">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </body>
+</html>
