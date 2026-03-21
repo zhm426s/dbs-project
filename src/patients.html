@@ -13,11 +13,11 @@
         </header>
         <main>
             <div id="search-form">
-                <form>
+                <form methord="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="ssn">SSN:</label><br>
-                        <input type="text" id="ssn" name="ssn" value="e.g. 000-00-0000">
+                        <input type="password" id="ssn" name="ssn">
                     </div>
                     <div class="search-field">
                         <label for="Name">Name:</label><br>
@@ -37,8 +37,14 @@
                     </div>
                     <input type="submit" value="Search">
                 </form>
-                <form>
+            </div>
+            <div id="filter-form">
+                <form method="post">
                     <p>Filter: </p>
+                    <div class="filter-field">
+                        <label for="condition">Condition:</label><br>
+                        <input type="text" id="condition" name="condition" value="e.g. Fever">
+                    </div>   
                     <div class="filter-field">
                         <label for="minAge">Minimum Age:</label><br>
                         <input type="number" id="minAge" name="minAge" min="0" max="110">
@@ -61,6 +67,38 @@
                     </div>       
                     <input type="submit" value="Filter">
                 </form>
+            </div>
+            <div id="results">
+                <p>Results: </p>
+                <table id="results-table">
+                    <tr>
+                        <th>Name</th>
+                        <th>Conditions</th>
+                        <th>Currently Staying?</th> <!--Room number, or No-->
+                        <th>Date of Birth</th>
+                        <th>Sex</th>
+                        <th>Email Address</th>
+                        <th>Phone Number</th>
+                        <th>Insurance</th> <!--Provider, Plan-->
+                        <th class="treatments">View Treatments</th> <!--for treatments button-->
+                        <th class="update">Update</th> <!--for update button-->
+                        <th class="delete">Delete</th> <!--for delete button-->
+                    </tr>
+                    <!--organization of a single row (to be revised when interaction is added)-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="treatments"><button class="ptreatment-button">View Treatments</button></td>
+                        <td class="update"><button class="update-button">Update</button></td>
+                        <td class="delete"><button class="delete-button">Delete</button></td>
+                    </tr>
+                </table>
             </div>
         </main>
     </body>
