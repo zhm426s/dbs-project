@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Rooms</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: add floor (w/ all rooms), edit room info, search rooms, remove room(s)-->
+    <body>
+        <header>
+            <h1>Patient Directory</h1>
+            <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
+        </header>
+        <main>
+            <!--for adding a new floor-->
+            <button class="add-button" onclick="location.href='floorform.html';">Add Floor</button>
+            <button class="add-button" onclick="location.href='roomform.html';">Add Individual Room</button>
+            <div id="search-form">
+                <form method="post">
+                    <p>Search: </p>
+                    <div class="search-field">
+                        <label for="roomid">Room ID:</label><br>
+                        <input type="text" id="roomid" name="roomid">
+                    </div>
+                    <div class="search-field">
+                        <label for="building">Building:</label><br>
+                        <input type="text" id="building" name="building" value="e.g. Main Building">
+                    </div>
+                    <div class="search-field">
+                        <label for="floor">Floor Number:</label><br>
+                        <input type="text" id="floor" name="floor" value="e.g. 2">
+                    </div>
+                    <div class="search-field">
+                        <label for="roomno">Room Number:</label><br>
+                        <input type="text" id="roomno" name="email" value="e.g. 200">
+                    </div>
+                    <div class="search-field">
+                        <label for="deptName">Department Name:</label><br>
+                        <input type="text" id="deptName" name="deptName" value="e.g. Primary Care">
+                    </div>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <div id="filter-form">
+                <form method="post">
+                    <p>Filter: </p>
+                    <div class="filter-field">
+                        <input type="radio" id="occupied" name="status" value="Yes">
+                        <label for="occupied">Occupied</label><br>
+                        <input type="radio" id="vacant" name="status" value="No">
+                        <label for="vacant">Vacant</label><br>
+                        <input type="radio" id="either" name="status" value="">
+                        <label for="either">Show All</label>
+                    </div>   
+                    <div class="filter-field">
+                        <label for="minRate">Minimum Daily Rate ($):</label><br>
+                        <input type="number" id="minRate" name="minRate" min="100" max="2000" step="50">
+                    </div>
+                    <div class="filter-field">
+                        <label for="maxRate">Maximum Daily Rate ($):</label><br>
+                        <input type="number" id="maxRate" name="maxRate" min="100" max="2000" step="50">
+                    </div>      
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+            <div id="results">
+                <p>Results: </p>
+                <table id="results-table">
+                    <tr>
+                        <th>Room ID</th>
+                        <th>Room Number</th>
+                        <th>Floor</th>
+                        <th>Building</th>
+                        <th>Currently Occupied</th>
+                        <th>Daily Rate</th>
+                        <th>Department</th>
+                        <th class="stays">View Stays</th> <!--for stays button-->
+                        <th class="update">Update</th> <!--for update button-->
+                        <th class="update">Update Floor</th> <!--for update button-->
+                        <th class="delete">Delete</th> <!--for delete button-->
+                    </tr>
+                    <!--organization of a single row (to be revised when interaction is added)-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="stays"><button class="rstays-button">View Stays</button></td>
+                        <td class="update"><button class="update-button" onclick="location.href='roomform.html';">Update</button></td>
+                        <td class="update"><button class="update-button" onclick="location.href='floorform.html';">Update</button></td>
+                        <td class="delete"><button class="delete-button">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </body>
+</html>
