@@ -8,13 +8,15 @@
     <!--Functions: add floor (w/ all rooms), edit room info, search rooms, remove room(s)-->
     <body>
         <header>
-            <h1>Patient Directory</h1>
+            <h1>Room Directory</h1>
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
             <!--for adding a new floor-->
-            <button class="add-button" onclick="location.href='floorform.html';">Add Floor</button>
-            <button class="add-button" onclick="location.href='roomform.html';">Add Individual Room</button>
+            <div id="actions">
+                <button class="add-button" onclick="location.href='floorform.html';">Add Floor</button>
+                <button class="add-button" onclick="location.href='roomform.html';">Add Individual Room</button>
+            </div>
             <div id="search-form">
                 <form method="post">
                     <p>Search: </p>
@@ -90,7 +92,7 @@
                         <td></td>
                         <td class="stays"><button class="rstays-button">View Stays</button></td>
                         <td class="update"><button class="update-button" onclick="location.href='roomform.html';">Update</button></td>
-                        <td class="update"><button class="update-button" onclick="location.href='floorform.html';">Update</button></td>
+                        <td class="update"><button class="update-button" onclick="location.href='floorform.html';">Update Floor</button></td>
                         <td class="delete"><button class="delete-button">Delete</button></td>
                     </tr>
                 </table>
