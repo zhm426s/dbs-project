@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Bills</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: (bill auto-created for every stay, treatments auto-added to bill when ordered) view billing history (w filters), view + print bill for patient (calc oop costs included), manually edit bill, delete bill record -->    <body>
+        <header>
+            <h1>Billing Directory</h1>
+            <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
+        </header>
+        <main>
+            <div id="search-form">
+                <form method="post">
+                    <p>Search: </p>
+                    <div class="search-field">
+                        <label for="ssn">Patient SSN:</label><br>
+                        <input type="password" id="ssn" name="ssn">
+                    </div>
+                    <div class="search-field">
+                        <label for="Name">Patient Name:</label><br>
+                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                    </div>
+                    <div class="search-field">
+                        <label for="stayid">Stay ID: </label><br>
+                        <input type="text" id="stayid" name="stayid" value="e.g. 2">
+                    </div>
+                    <input type="submit" value="Search">
+                </form>
+            </div>
+            <div id="filter-form">
+                <form method="post">
+                    <p>Filter: </p>
+                    <div class="filter-field">
+                        <label for="minTot">Minimum Total ($):</label><br>
+                        <input type="number" id="minTot" name="minTot" min="0" max="1000000" step="500">
+                    </div>
+                    <div class="filter-field">
+                        <label for="maxTot">Maximum Total ($):</label><br>
+                        <input type="number" id="maxTot" name="maxTot" min="0" max="1000000" step="500">
+                    </div>
+                    <input type="submit" value="Filter">
+                </form>
+            </div>
+            <div id="results">
+                <p>Results: </p>
+                <table id="results-table">
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Stay ID</th>
+                        <th>Room Cost</th>
+                        <th>Treatment</th>
+                        <th>Treatment Costs</th>
+                        <th>Subtotal</th>
+                        <th>Insurance Coverage</th>
+                        <th>Tax</th>
+                        <th>Total</th>
+                        <th class="update">Edit</th> <!--for edit button-->
+                        <th class="delete">Delete</th> <!--for delete button-->
+                    </tr>
+                    <!--organization of a single row (to be revised when interaction is added)-->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="update"><button class="update-button" onclick="location.href='billform.html';">Update</button></td>
+                        <td class="delete"><button class="delete-button">Delete</button></td>
+                    </tr>
+                </table>
+            </div>
+        </main>
+    </body>
+</html>
