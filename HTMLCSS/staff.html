@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: add staff, search staff (w filters), edit staff info, remove staff-->
+    <!--Functions: search staff (w filters), remove staff-->
     <body>
         <header>
             <h1>Staff Directory</h1>
@@ -19,19 +19,19 @@
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="empid">Employee ID:</label><br>
-                        <input type="text" id="empid" name="empid" value="e.g. 2">
+                        <input type="text" id="empid" name="empid" placeholder="e.g. 2">
                     </div>
                     <div class="search-field">
                         <label for="Name">Name:</label><br>
-                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="address">Address:</label><br>
-                        <input type="text" id="address" name="address" value="e.g. 123 Main St">
+                        <input type="text" id="address" name="address" placeholder="e.g. 123 Main St">
                     </div>
                     <div class="search-field">
                         <label for="title">Title:</label><br>
-                        <input type="text" id="title" name="title" value="e.g. Director of Medicine">
+                        <input type="text" id="title" name="title" placeholder="e.g. Director of Medicine">
                     </div>
                     <input type="submit" value="Search">
                 </form>
@@ -49,16 +49,16 @@
                     </div>   
                     <div class="filter-field">
                         <label for="deptid">Department (ID):</label><br>
-                        <input type="text" id="deptid" name="deptid" value="e.g. 2">
+                        <input type="text" id="deptid" name="deptid" placeholder="e.g. 2">
                     </div>
                     <div class="filter-field">
                         <label for="deptName">Department (Name):</label><br>
-                        <input type="text" id="deptName" name="deptName" value="e.g. Primary Care">
+                        <input type="text" id="deptName" name="deptName" placeholder="e.g. Primary Care">
                     </div>
                     </div>
                     <div class="filter-field">
                         <label for="special">Specialization:</label><br>
-                        <input type="text" id="special" name="special" value="e.g. Paediatrics">
+                        <input type="text" id="special" name="special" placeholder="e.g. Paediatrics">
                     </div>       
                     <input type="submit" value="Filter">
                 </form>
