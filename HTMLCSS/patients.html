@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: add patient, search patients (w filters), edit patient info, remove patient, set insurance, change insurance, remove insurance-->
+    <!--Functions: search patients (w filters), remove patient-->
     <body>
         <header>
             <h1>Patient Directory</h1>
@@ -23,7 +23,7 @@
                     </div>
                     <div class="search-field">
                         <label for="Name">Name:</label><br>
-                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="dob">Date of Birth:</label><br>
@@ -31,13 +31,14 @@
                     </div>
                     <div class="search-field">
                         <label for="email">Email Address:</label><br>
-                        <input type="text" id="email" name="email" value=" e.g.johndoe@example.org">
+                        <input type="email" id="email" name="email" placeholder=" e.g.johndoe@example.org">
                     </div>
                     <div class="search-field">
                         <label for="phone">Phone #:</label><br>
-                        <input type="text" id="phone" name="phone" value="e.g. 555-555-5555">
+                        <input type="tel" id="phone" name="phone" placeholder="e.g. 555-555-5555">
                     </div>
                     <input type="submit" value="Search">
+                    <input type="reset" value="Clear Search">
                 </form>
             </div>
             <div id="filter-form">
@@ -45,7 +46,7 @@
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="condition">Condition:</label><br>
-                        <input type="text" id="condition" name="condition" value="e.g. Fever">
+                        <input type="text" id="condition" name="condition" placeholder="e.g. Fever">
                     </div>   
                     <div class="filter-field">
                         <label for="minAge">Minimum Age:</label><br>
@@ -65,9 +66,10 @@
                     </div>
                     <div class="filter-field">
                         <label for="insurer">Insurance Provider:</label><br>
-                        <input type="text" id="insurer" name="insurer" value="e.g. Aetna">
+                        <input type="text" id="insurer" name="insurer" placeholder="e.g. Aetna">
                     </div>       
                     <input type="submit" value="Filter">
+                    <input type="reset" value="Clear Filters">
                 </form>
             </div>
             <div id="results">

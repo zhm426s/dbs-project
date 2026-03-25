@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Patient Form</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: add patient, edit patient info, remove patient, set insurance, change insurance, remove insurance-->
+    <body>
+        <header>
+            <h1>Enter Patient Information</h1>
+            <button class="directory-button" onclick="location.href='patients.html';">Back to Patients Directory</button>
+        </header>
+        <main>
+            <div id="edit-form">
+                <form method="post">
+                    <p>Search: </p>
+                    <div class="edit-field">
+                        <label for="new">Is this a new patient?:</label><br>
+                        <select id="new" name="new">
+                            <option value="new" required>Yes</option>
+                            <option value="existing">No</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="ssn">SSN:</label><br>
+                        <input type="password" id="ssn" name="ssn" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="Name">Name:</label><br>
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="dob">Date of Birth (If unknown, enter estimated):</label><br>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="sex">Biological Sex:</label><br>
+                        <select id="sex" name="sex">
+                            <option value="m" required>Male</option>
+                            <option value="f">Female</option>
+                            <option value="x">Intersex</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="conditions">Conditions (Separate with ",")</label>
+                        <input type="text" id="conditions" name="conditions" placeholder="e.g Fever">
+                    </div>
+                    <div class="edit-field">
+                        <label for="email">Email Address:</label><br>
+                        <input type="email" id="email" name="email" placeholder=" e.g.johndoe@example.org">
+                    </div>
+                    <div class="edit-field">
+                        <label for="phone">Phone #:</label><br>
+                        <input type="text" id="phone" name="phone" placeholder="e.g. 555-555-5555">
+                    </div>
+                    <div class="edit-field">
+                        <label for="insurer">Insurance Provider:</label><br>
+                        <input type="text" id="insurer" name="insurer" placeholder="e.g. Aetna">
+                    </div>   
+                    <div class="edit-field">
+                        <label for="insurancePlan">Insurance Plan Name:</label><br>
+                        <input type="text" id="insurancePlan" name="insurancePlan" placeholder="e.g. Premium Benefits Plan">
+                    </div>      
+                    <div class="edit-field">
+                        <label for="insurancePercent">Insurance Coverage Percent:</label><br>
+                        <input type="number" id="insurancePercent" name="insurancePercent" min="0.05" max="100.0" step="0.01">
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
