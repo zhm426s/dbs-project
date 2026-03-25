@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Staff Form</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: add staff, edit staff-->
+    <body>
+        <header>
+            <h1>Enter Staff Information</h1>
+            <button class="directory-button" onclick="location.href='patients.html';">Back to Patients Directory</button>
+        </header>
+        <main>
+            <div id="edit-form">
+                <form method="post">
+                    <p>Search: </p>
+                    <div class="edit-field">
+                        <label for="new">Is this a new staff member?:</label><br>
+                        <select id="new" name="new">
+                            <option value="new" required>Yes</option>
+                            <option value="existing">No</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="Name">Name:</label><br>
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="address">Address:</label><br>
+                        <input type="text" id="address" name="address" placeholder="e.g. 123 Main St" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="title">Title:</label><br>
+                        <input type="text" id="title" name="title" placeholder="e.g. Director of Medicine" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="role">Role:</label><br>
+                        <select id="role" name="role">
+                            <option value="doctor" required>Doctor</option>
+                            <option value="nurse">Nurse</option>
+                            <option value="surgeon">Surgeon</option>
+                            <option value="surgeon">Other</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="special">Specialization:</label><br>
+                        <input type="text" id="special" name="special" placeholder="e.g. Paediatrics" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="deptid">Department (ID, enter -1 if no department):</label><br>
+                        <input type="text" id="deptid" name="deptid" placeholder="e.g. 2" required>
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
