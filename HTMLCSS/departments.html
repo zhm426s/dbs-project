@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: add department, view departments, edit dept info, remove department-->
+    <!--Functions: view departments, remove department-->
     <body>
         <header>
             <h1>Department Directory</h1>
@@ -19,9 +19,10 @@
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="name">Dept Name:</label><br>
-                        <input type="text" id="name" name="name" value="e.g. Primary Care">
+                        <input type="text" id="name" name="name" placeholder="e.g. Primary Care">
                     </div>
                     <input type="submit" value="Search">
+                    <input type="reset" value="Clear Search">
                 </form>
             </div>
             <div id="filter-form">
@@ -29,9 +30,10 @@
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="building">Building:</label><br>
-                        <input type="text" id="building" name="building" value="e.g. Main Building">
+                        <input type="text" id="building" name="building" placeholder="e.g. Main Building">
                     </div>          
                     <input type="submit" value="Filter">
+                    <input type="reset" value="Clear Filter">
                 </form>
             </div>
             <div id="results">
