@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Treatment Form</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: order treatment, edit treatment record-->
+    <body>
+        <header>
+            <h1>Enter Treatment Information</h1>
+            <button class="directory-button" onclick="location.href='treatments.html';">Back to Treatments Directory</button>
+            <button class="directory-button" onclick="location.href='patients.html';">Look Up Patient</button>
+        </header>
+        <main>
+            <div id="edit-form">
+                <form method="post">
+                    <div class="edit-field">
+                        <label for="new">Is this a new treatment record?:</label><br>
+                        <select id="new" name="new">
+                            <option value="new" required>Yes</option>
+                            <option value="existing">No</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="name">Patient Name (Matching record):</label><br>
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="dob">Patient Date of Birth (Matching record):</label><br>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="type">Treatment Type:</label><br>
+                        <select id="type" name="type">
+                            <option value="test" required>Test</option>
+                            <option value="prescription">Prescription</option>
+                            <option value="surgery">Surgery</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="baseCost">Base Cost ($):</label><br>
+                        <input type="number" id="baseCost" name="baseCost" min="0" max="20000" value="300" step="50" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="tname">Treatment Name:</label><br>
+                        <input type="text" id="tname" name="tname" placeholder="e.g. X-Ray Hand R" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="tdesc">Treatment Description:</label><br>
+                        <input type="text" id="tdesc" name="tdesc" placeholder="e.g. X-Ray Imaging of Right Hand">
+                    </div>
+                    <div class="edit-field">
+                        <label for="orderer">Ordering Doctor ID:</label><br>
+                        <input type="text" id="orderer" name="orderer" placeholder="e.g. John, Doe, John Doe">
+                    </div>   
+                    <div class="edit-field show-test">
+                        <label for="testType">(Test) Type:</label><br>
+                        <input type="text" id="testType" name="testType" placeholder="e.g. X-Ray">
+                    </div>
+                    <div class="edit-field show-test">
+                        <label for="testAna">(Test) Analyte:</label><br>
+                        <input type="text" id="testAna" name="testAna" placeholder="e.g. Blood">
+                    </div>
+                    <div class="edit-field show-surg">
+                        <label for="surgeon">(Surgery) Surgeon ID:</label><br>
+                        <input type="text" id="surgeon" name="surgeon" placeholder="e.g. 2">
+                    </div>
+                    <div class="edit-field show-pres">
+                        <label for="med">(Prescription) Medication (Generic):</label><br>
+                        <input type="text" id="med" name="med" placeholder="e.g. Ibuprofen">
+                    </div>
+                    <div class="edit-field show-pres">
+                        <label for="medb">(Prescription) Medication (Brand):</label><br>
+                        <input type="text" id="medb" name="medb" placeholder="e.g. Advil">
+                    </div>
+                    <div class="edit-field show-pres">
+                        <label for="dose">(Prescription) Dosage:</label><br>
+                        <input type="number" id="dose" name="dose" min="1" max="4000" placeholder="e.g. 250">
+                    </div>
+                    <div class="edit-field show-pres">
+                        <label for="unit">(Prescription) Dosage Unit:</label><br>
+                        <input type="text" id="unit" name="unit" placeholder="e.g. mg">
+                    </div>
+                    <div class="edit-field show-pres">
+                        <label for="freq">(Prescription) Frequency:</label><br>
+                        <input type="text" id="freq" name="freq" placeholder="e.g. Once daily">
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                </form>
+            </div>
+        </main>
+    </body>
+</html>

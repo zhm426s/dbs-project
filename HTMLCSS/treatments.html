@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: order treatment, search treatment records (w filters), edit treatment record, edit test results, remove test record-->
+    <!--Functions: search treatment records (w filters), edit test results, remove test record-->
     <body>
         <header>
             <h1>Treatment Directory</h1>
@@ -15,6 +15,7 @@
             <div id="actions">
                 <!--for ordering a new treatment-->
                 <button class="add-button" onclick="location.href='treatmentform.html';">Order New Treatment</button>
+                <!--for inputting test results-->
                 <button class="add-button" onclick="location.href='resultform.html';">Input Test Results</button>
             </div>
             <div id="search-form">
@@ -25,24 +26,28 @@
                         <input type="password" id="ssn" name="ssn">
                     </div>
                     <div class="search-field">
-                        <label for="Name">Patient Name:</label><br>
-                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                        <label for="name">Patient Name:</label><br>
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="treatid">Treatment ID:</label><br>
-                        <input type="text" id="treatid" name="treatid" value="e.g. 2">
+                        <input type="text" id="treatid" name="treatid" placeholder="e.g. 2">
+                    </div>
+                    <div class="search-field">
+                        <label for="tname">Treatment Name:</label><br>
+                        <input type="text" id="tname" name="tname" placeholder="e.g. X-Ray Hand R">
                     </div>
                     <div class="search-field">
                         <label for="orderer">Ordering Doctor ID:</label><br>
-                        <input type="text" id="orderer" name="orderer" value="e.g. John, Doe, John Doe">
+                        <input type="text" id="orderer" name="orderer" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="med">(Prescription) Medication:</label><br>
-                        <input type="text" id="med" name="med" value="e.g. Ibuprofen">
+                        <input type="text" id="med" name="med" placeholder="e.g. Ibuprofen">
                     </div>
                     <div class="search-field">
                         <label for="testType">(Test) Type:</label><br>
-                        <input type="text" id="testType" name="testType" value="e.g. X-Ray">
+                        <input type="text" id="testType" name="testType" placeholder="e.g. X-Ray">
                     </div>
                     <div class="search-field">
                         <label for="testResult">(Test) Has Results:</label><br>
@@ -55,7 +60,7 @@
                     </div>
                     <div class="search-field">
                         <label for="surgeon">(Surgery) Surgeon ID:</label><br>
-                        <input type="text" id="surgeon" name="surgeon" value="e.g. 2">
+                        <input type="text" id="surgeon" name="surgeon" placeholder="e.g. 2">
                     </div>
                     <input type="submit" value="Search">
                 </form>
