@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: begin stay (sp patient or make new), end stay, search current/past stays (w filters), (assign/unassign, auto assign rooms: part of beginning stay)-->
+    <!--Functions: end stay, search current/past stays (w filters)-->
     <body>
         <header>
             <h1>Stay Directory</h1>
@@ -19,7 +19,7 @@
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="stayid">Stay ID:</label><br>
-                        <input type="text" id="stayid" name="stayid" value="e.g. 2">
+                        <input type="text" id="stayid" name="stayid" placeholder="e.g. 2">
                     </div>
                     <div class="search-field">
                         <label for="ssn">Patient SSN:</label><br>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="search-field">
                         <label for="Name">Patient Name:</label><br>
-                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="start">Start Date:</label><br>
@@ -39,11 +39,11 @@
                     </div>
                     <div class="search-field">
                         <label for="provider">Care Provider Name:</label><br>
-                        <input type="text" id="provider" name="provider" value="e.g. John, Doe, John Doe">
+                        <input type="text" id="provider" name="provider" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="roomid">Room ID:</label><br>
-                        <input type="text" id="roomid" name="roomid" value="e.g. 2">
+                        <input type="text" id="roomid" name="roomid" placeholder="e.g. 2">
                     </div>
                     <input type="submit" value="Search">
                 </form>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="filter-field">
                         <label for="deptName">Department Name:</label><br>
-                        <input type="text" id="deptName" name="deptName" value="e.g. Primary Care">
+                        <input type="text" id="deptName" name="deptName" placeholder="e.g. Primary Care">
                     </div>       
                     <input type="submit" value="Filter">
                 </form>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Begin Stay</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: begin stay (sp patient or make new), (assign/unassign, auto assign rooms: part of beginning stay)-->
+    <body>
+        <header>
+            <h1>Enter New Stay Information</h1>
+            <button class="directory-button" onclick="location.href='stays.html';">Back to Stays Directory</button>
+            <button class="directory-button" onclick="location.href='patients.html';">Look Up Existing or Add New Patient</button>
+        </header>
+        <main>
+            <div id="edit-form">
+                <form method="post">
+                    <div class="edit-field">
+                        <label for="Name">Patient Name (Matching Record):</label><br>
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="dob">Patient Date of Birth (Matching Record):</label><br>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="startDate">Starting Date:</label><br>
+                        <input type="date" id="startDate" name="startDate" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="conditions">New Conditions (Separate with ",")</label>
+                        <input type="text" id="conditions" name="conditions" placeholder="e.g Fever">
+                    </div>
+                    <div class="edit-field">
+                        <label for="provider">Care Provider ID:</label><br>
+                        <input type="text" id="provider" name="provider" placeholder="e.g. 2">
+                    </div>
+                    <p>Enter Room ID or select "Auto-Assign"</p>
+                    <div class="edit-field">
+                        <label for="roomid">Room ID:</label><br>
+                        <input type="text" id="roomid" name="roomid" placeholder="e.g. 2">
+                    </div>
+                    <button id="auto-assign-button" onclick="">Auto-Assign Room</button>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
