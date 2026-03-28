@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: add floor (w/ all rooms), edit room info, search rooms, remove room(s)-->
+    <!--Functions: edit room info, search rooms, remove room(s)-->
     <body>
         <header>
             <h1>Room Directory</h1>
@@ -26,19 +26,19 @@
                     </div>
                     <div class="search-field">
                         <label for="building">Building:</label><br>
-                        <input type="text" id="building" name="building" value="e.g. Main Building">
+                        <input type="text" id="building" name="building" placeholder="e.g. Main Building">
                     </div>
                     <div class="search-field">
                         <label for="floor">Floor Number:</label><br>
-                        <input type="text" id="floor" name="floor" value="e.g. 2">
+                        <input type="text" id="floor" name="floor" placeholder="e.g. 2">
                     </div>
                     <div class="search-field">
                         <label for="roomno">Room Number:</label><br>
-                        <input type="text" id="roomno" name="email" value="e.g. 200">
+                        <input type="text" id="roomno" name="email" placeholder="e.g. 200">
                     </div>
                     <div class="search-field">
                         <label for="deptName">Department Name:</label><br>
-                        <input type="text" id="deptName" name="deptName" value="e.g. Primary Care">
+                        <input type="text" id="deptName" name="deptName" placeholder="e.g. Primary Care">
                     </div>
                     <input type="submit" value="Search">
                 </form>
@@ -56,11 +56,11 @@
                     </div>   
                     <div class="filter-field">
                         <label for="minRate">Minimum Daily Rate ($):</label><br>
-                        <input type="number" id="minRate" name="minRate" min="100" max="2000" step="50">
+                        <input type="number" id="minRate" name="minRate" min="0" max="2000" step="50">
                     </div>
                     <div class="filter-field">
                         <label for="maxRate">Maximum Daily Rate ($):</label><br>
-                        <input type="number" id="maxRate" name="maxRate" min="100" max="2000" step="50">
+                        <input type="number" id="maxRate" name="maxRate" min="0" max="2000" step="50">
                     </div>      
                     <input type="submit" value="Filter">
                 </form>

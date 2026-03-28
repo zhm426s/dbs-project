@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Floor Form</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <!--Functions: add floor (w/ all rooms), edit floor-->
+    <body>
+        <header>
+            <h1>Enter Floor Information</h1>
+            <button class="directory-button" onclick="location.href='rooms.html';">Back to Room Directory</button>
+        </header>
+        <main>
+            <div id="edit-form">
+                <form method="post">
+                    <p>Search: </p>
+                    <div class="edit-field">
+                        <label for="new">Is this a new floor?:</label><br>
+                        <select id="new" name="new">
+                            <option value="new" required>Yes</option>
+                            <option value="existing">No</option>
+                        </select>
+                    </div>
+                    <div class="edit-field">
+                        <label for="fnum">Floor Number:</label><br>
+                        <input type="number" id="fnum" name="fnum" min="0" max="30" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="deptid">Department (ID, enter -1 if no department):</label><br>
+                        <input type="text" id="deptid" name="deptid" placeholder="e.g. 2" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="building">Building:</label><br>
+                        <input type="text" id="building" name="building" placeholder="e.g. Main Building">
+                    </div>
+                    <div class="edit-field"> <!--will auto-create this number of rooms with number 100 * fnum + rnum, assigned to this floor and same department-->
+                        <label for="frooms">Number of Rooms:</label><br>
+                        <input type="number" id="frooms" name="frooms" min="0" max="99" value="30" required>
+                    </div>
+                    <div class="edit-field">
+                        <label for="rrate">Daily Rate of Rooms ($):</label><br>
+                        <input type="number" id="rrate" name="rrate" min="0" max="2000" value="200" required>
+                    </div>
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Clear">
+                </form>
+            </div>
+        </main>
+    </body>
+</html>
