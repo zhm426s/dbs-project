@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: add patient, edit patient info, remove patient, set insurance, change insurance, remove insurance-->
+    <!--Functions: add patient, edit patient info, set insurance, change insurance, remove insurance-->
     <body>
         <header>
             <h1>Enter Patient Information</h1>
@@ -43,7 +43,7 @@
                     </div>
                     <div class="edit-field">
                         <label for="conditions">Conditions (Separate with ",")</label>
-                        <input type="text" id="conditions" name="conditions" placeholder="e.g Fever">
+                        <input type="text" id="conditions" name="conditions" placeholder="e.g Fever,Headaches,Congestion">
                     </div>
                     <div class="edit-field">
                         <label for="email">Email Address:</label><br>
@@ -53,6 +53,10 @@
                         <label for="phone">Phone #:</label><br>
                         <input type="text" id="phone" name="phone" placeholder="e.g. 555-555-5555">
                     </div>
+                    <div class="edit-field">
+                        <label for="insuranceid">Insurance ID/Member Number:</label><br>
+                        <input type="text" id="insuranceid" name="insuranceid" placeholder="e.g. 3PJ3I84928F">
+                    </div> 
                     <div class="edit-field">
                         <label for="insurer">Insurance Provider:</label><br>
                         <input type="text" id="insurer" name="insurer" placeholder="e.g. Aetna">
