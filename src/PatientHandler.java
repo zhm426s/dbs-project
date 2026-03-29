@@ -2,16 +2,37 @@ import java.sql.*;
 
 public class PatientHandler extends DBConn{
 
-    public PatientHandler(){
+    String ssn;
+    String name;
+    String dob;
+    char bioSex;
+    String email;
+    String phone;
+    String insID;
+    String insProvider;
+    double insPercent;
+    String insPlan;
+    String conditions;
 
+    public PatientHandler(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String insProvider, double insPercent, String insPlan, String conditions){
+        this.ssn = ssn;
+        this.name = name;
+        this.dob = dob;
+        this.bioSex = bioSex;
+        this.email = email;
+        this.phone = phone;
+        this.insID = insID;
+        this.insProvider = insProvider;
+        this.insPercent = insPercent;
+        this.insPlan = insPlan;
+        this.conditions = conditions;
     }
 
     // for use in testing
     public static void main(String[] args) {
-        addPatient("123-98-7654", "John Doe Jr.", "2003-01-01", 'M', "johndoe2@example.org", "123-555-5678", "KDSO4338UJFS", "Aetna", 0.13, "Bronze Plan", "Fractured Tibia");
     }
 
-    public static void addPatient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String insProvider, double insPercent, String insPlan, String conditions){
+    public void addPatient(){
         // parse condition array
         String[] conditionArr = conditions.split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
         try {
