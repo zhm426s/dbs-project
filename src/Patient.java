@@ -1,4 +1,3 @@
-import java.sql.*;
 
 public class Patient extends DBConn{
 
@@ -32,43 +31,59 @@ public class Patient extends DBConn{
     public static void main(String[] args) {
     }
 
-    public void addPatient(){
-        // parse condition array
-        String[] conditionArr = conditions.split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
-        try {
-            Connection conn = createConn();
-            if (!(insProvider.equals(""))){
-                // add insurance policy
-                Statement addInsuranceStmt = conn.createStatement();
-                String addInsurance = ("INSERT IGNORE INTO insurancepolicy" + // INSERT IGNORE only adds if the ID is unique (e.g. adding patients under same insurance wont add new insurance)
-                    "(insuranceID, providerName, coveragePercent, planName)" +
-                    "VALUES ('"+ insID +"', '" + insProvider + "', " + insPercent + ", '" + insPlan + "')");
-                addInsuranceStmt.executeUpdate(addInsurance);
-                System.out.println("Added patient insurance.");
-            } else {
-                insID = "NULL";
-            }
+    public String getSsn() {
+        return ssn;
+    }
 
-            // add patient
-            Statement addPatientStmt = conn.createStatement();
-            String addPatient = ("INSERT INTO patient" +
-                "(ssn, name, dateOfBirth, age, bioSex, email, phone, insuranceID)" +
-                "VALUES ('"+ ssn +"', '"+ name +"', '"+ dob +"', TIMESTAMPDIFF(YEAR, '"+ dob +"', CURDATE()), '"+ bioSex +"', '"+ email +"', '"+ phone +"', '"+ insID +"')");
-            addPatientStmt.executeUpdate(addPatient);
-            System.out.println("Added patient.");
+    public void setSsn(String ssn) {
+        this.ssn = ssn;
+    }
 
-            // add conditions
-            int i;
-            for (i = 0; i < conditionArr.length; i++) {
-                Statement addConditionStmt = conn.createStatement();
-                String addCondition = "INSERT INTO condition_" +
-                "(patientSSN, condition_)" +
-                "VALUES ('"+ ssn +"', '"+ conditionArr[i] +"')";
-                addConditionStmt.executeUpdate(addCondition);
-                System.out.println("Added condition.");
-            }
-        } catch (SQLException e) {
-            System.out.println("SQL Err: " + e.getMessage());
-        }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public char getBioSex() {
+        return bioSex;
+    }
+
+    public void setBioSex(char bioSex) {
+        this.bioSex = bioSex;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getInsID() {
+        return insID;
+    }
+
+    public void setInsID(String insID) {
+        this.insID = insID;
     }
 }
