@@ -7,17 +7,6 @@ public class PatientImpl extends DBConn {
         String[] conditionArr = patient.conditions.split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
         try {
             Connection conn = createConn();
-            if (!(patient.insProvider.equals(""))){
-                // add insurance policy
-                Statement addInsuranceStmt = conn.createStatement();
-                String addInsurance = ("INSERT IGNORE INTO insurancepolicy" + // INSERT IGNORE only adds if the ID is unique (e.g. adding patients under same insurance wont add new insurance)
-                    "(insuranceID, providerName, coveragePercent, planName)" +
-                    "VALUES ('"+ patient.insID +"', '" + patient.insProvider + "', " + patient.insPercent + ", '" + patient.insPlan + "')");
-                addInsuranceStmt.executeUpdate(addInsurance);
-                System.out.println("Added patient insurance.");
-            } else {
-                patient.insID = "NULL";
-            }
 
             // add patient
             Statement addPatientStmt = conn.createStatement();
