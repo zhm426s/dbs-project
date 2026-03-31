@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class PatientImpl extends DBConn {
     public void addPatient(Patient patient) {
         // parse condition array
-        String[] conditionArr = patient.conditions.split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
+        String[] conditionArr = patient.getConditions().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
         try {
             Connection conn = createConn();
 
@@ -12,7 +12,7 @@ public class PatientImpl extends DBConn {
             Statement addPatientStmt = conn.createStatement();
             String addPatient = ("INSERT INTO patient" +
                 "(ssn, name, dateOfBirth, age, bioSex, email, phone, insuranceID)" +
-                "VALUES ('"+ patient.ssn +"', '"+ patient.name +"', '"+ patient.dob +"', TIMESTAMPDIFF(YEAR, '"+ patient.dob +"', CURDATE()), '"+ patient.bioSex +"', '"+ patient.email +"', '"+ patient.phone +"', '"+ patient.insID +"')");
+                "VALUES ('"+ patient.getSsn() +"', '"+ patient.getName() +"', '"+ patient.getDob() +"', TIMESTAMPDIFF(YEAR, '"+ patient.getDob() +"', CURDATE()), '"+ patient.getBioSex() +"', '"+ patient.getEmail() +"', '"+ patient.getPhone() +"', '"+ patient.getInsID() +"')");
             addPatientStmt.executeUpdate(addPatient);
             System.out.println("Added patient.");
 
@@ -22,7 +22,7 @@ public class PatientImpl extends DBConn {
                 Statement addConditionStmt = conn.createStatement();
                 String addCondition = "INSERT INTO condition_" +
                 "(patientSSN, condition_)" +
-                "VALUES ('"+ patient.ssn +"', '"+ conditionArr[i] +"')";
+                "VALUES ('"+ patient.getSsn() +"', '"+ conditionArr[i] +"')";
                 addConditionStmt.executeUpdate(addCondition);
                 System.out.println("Added condition.");
             }

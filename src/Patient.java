@@ -1,17 +1,14 @@
 
-public class Patient extends DBConn{
+public class Patient {
 
-    String ssn;
-    String name;
-    String dob;
-    char bioSex;
-    String email;
-    String phone;
-    String insID;
-    String insProvider;
-    double insPercent;
-    String insPlan;
-    String conditions;
+    private String ssn;
+    private String name;
+    private String dob;
+    private char bioSex;
+    private String email;
+    private String phone;
+    private String insID;
+    private String conditions;
 
     public Patient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String insProvider, double insPercent, String insPlan, String conditions){
         this.ssn = ssn;
@@ -21,9 +18,12 @@ public class Patient extends DBConn{
         this.email = email;
         this.phone = phone;
         this.insID = insID;
-        this.insProvider = insProvider;
-        this.insPercent = insPercent;
-        this.insPlan = insPlan;
+        if (this.insID != null) {
+            InsurancePlan insurance = new InsurancePlan(insID, insProvider, insPercent, insPlan);
+            InsurancePlanImpl insuranceDAO = new InsurancePlanImpl();
+            insuranceDAO.addInsurancePlan(insurance);
+        }
+        
         this.conditions = conditions;
     }
 
@@ -85,5 +85,13 @@ public class Patient extends DBConn{
 
     public void setInsID(String insID) {
         this.insID = insID;
+    }
+
+    public String getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(String conditions) {
+        this.conditions = conditions;
     }
 }
