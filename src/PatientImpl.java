@@ -48,16 +48,33 @@ public class PatientImpl extends DBConn {
                     rs.getString("email"),
                     rs.getString("phone"),
                     rs.getString("insuranceID"),
-                    "", // insProvider not stored in patient table, would require join to retrieve
-                    0.0,
-                    "",
-                    ""  // not sure how to handle this yet because it's in a whole other table
+                    getPatientConditions(ssn)
                 );
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         return null;
+    }
+
+    public String getPatientConditions(String ssn) {
+        StringBuilder conditions = new StringBuilder();
+        String sql = "SELECT * FROM condition_ WHERE patientSSN = ?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, ssn);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                conditions.append(rs.getString("condition_")).append(", ");
+            }
+            conditions.setLength(conditions.length() - 2); // remove trailing comma and space
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return conditions.toString();
     }
 
     public ArrayList<Patient> getAllPatients() {
