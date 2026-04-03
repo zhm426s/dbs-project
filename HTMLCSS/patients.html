@@ -15,7 +15,7 @@
             <!--for adding a new patient-->
             <button class="add-button" onclick="location.href='patientform.html';">Add Patient</button>
             <div id="search-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="ssn">SSN:</label><br>
@@ -37,12 +37,14 @@
                         <label for="phone">Phone #:</label><br>
                         <input type="tel" id="phone" name="phone" placeholder="e.g. 555-555-5555">
                     </div>
-                    <input type="submit" value="Search">
-                    <input type="reset" value="Clear Search">
+                    <div class="search-field">
+                        <input type="submit" value="Search">
+                        <input type="reset" value="Clear Search">
+                    </div>
                 </form>
             </div>
             <div id="filter-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="condition">Condition:</label><br>
@@ -59,6 +61,7 @@
                     <div class="filter-field">
                         <label for="sex">Biological Sex:</label><br>
                         <select id="sex" name="sex">
+                            <option value="">Show All</option>
                             <option value="m">Male</option>
                             <option value="f">Female</option>
                             <option value="x">Intersex</option>
@@ -67,9 +70,11 @@
                     <div class="filter-field">
                         <label for="insurer">Insurance Provider:</label><br>
                         <input type="text" id="insurer" name="insurer" placeholder="e.g. Aetna">
-                    </div>       
-                    <input type="submit" value="Filter">
-                    <input type="reset" value="Clear Filters">
+                    </div>   
+                    <div class="filter-field">    
+                        <input type="submit" value="Filter">
+                        <input type="reset" value="Clear Filters">
+                    </div>
                 </form>
             </div>
             <div id="results">

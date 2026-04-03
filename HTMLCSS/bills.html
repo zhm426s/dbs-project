@@ -12,7 +12,7 @@
         </header>
         <main>
             <div id="search-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="ssn">Patient SSN:</label><br>
@@ -26,11 +26,14 @@
                         <label for="stayid">Stay ID: </label><br>
                         <input type="text" id="stayid" name="stayid" value="e.g. 2">
                     </div>
-                    <input type="submit" value="Search">
+                    <div class="search-field">
+                        <input type="submit" value="Search">
+                        <input type="reset" value="Clear Search">
+                    </div>
                 </form>
             </div>
             <div id="filter-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="minTot">Minimum Total ($):</label><br>
@@ -40,7 +43,10 @@
                         <label for="maxTot">Maximum Total ($):</label><br>
                         <input type="number" id="maxTot" name="maxTot" min="0" max="1000000" step="500">
                     </div>
-                    <input type="submit" value="Filter">
+                    <div class="filter-field">    
+                        <input type="submit" value="Filter">
+                        <input type="reset" value="Clear Filters">
+                    </div>
                 </form>
             </div>
             <div id="results">

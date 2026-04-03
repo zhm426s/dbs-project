@@ -15,25 +15,29 @@
             <!--for adding a new dept-->
             <button class="add-button" onclick="location.href='departmentform.html';">Add Department</button>
             <div id="search-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="name">Dept Name:</label><br>
                         <input type="text" id="name" name="name" placeholder="e.g. Primary Care">
                     </div>
-                    <input type="submit" value="Search">
-                    <input type="reset" value="Clear Search">
+                    <div class="search-field">
+                        <input type="submit" value="Search">
+                        <input type="reset" value="Clear Search">
+                    </div>
                 </form>
             </div>
             <div id="filter-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="building">Building:</label><br>
                         <input type="text" id="building" name="building" placeholder="e.g. Main Building">
                     </div>          
-                    <input type="submit" value="Filter">
-                    <input type="reset" value="Clear Filter">
+                    <div class="filter-field">    
+                        <input type="submit" value="Filter">
+                        <input type="reset" value="Clear Filters">
+                    </div>
                 </form>
             </div>
             <div id="results">
