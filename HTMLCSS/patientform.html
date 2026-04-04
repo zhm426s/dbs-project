@@ -13,7 +13,7 @@
         </header>
         <main>
             <div id="edit-form">
-                <form class="edit" method="post">
+                <form class="edit-form" method="post">
                     <div class="edit-field">
                         <label for="new">Is this a new patient?:</label><br>
                         <select id="new" name="new">
@@ -42,7 +42,7 @@
                         </select>
                     </div>
                     <div class="edit-field">
-                        <label for="conditions">Conditions (Separate with ","):</label>
+                        <label for="conditions">Conditions (Separate with ",")</label>
                         <input type="text" id="conditions" name="conditions" placeholder="e.g Fever">
                     </div>
                     <div class="edit-field">
@@ -53,6 +53,10 @@
                         <label for="phone">Phone #:</label><br>
                         <input type="text" id="phone" name="phone" placeholder="e.g. 555-555-5555">
                     </div>
+                    <div class="edit-field">
+                        <label for="insuranceid">Insurance ID/Member Number:</label><br>
+                        <input type="text" id="insuranceid" name="insuranceid" placeholder="e.g. 3PJ3I84928F">
+                    </div> 
                     <div class="edit-field">
                         <label for="insurer">Insurance Provider:</label><br>
                         <input type="text" id="insurer" name="insurer" placeholder="e.g. Aetna">
