@@ -93,10 +93,7 @@ public class PatientImpl extends DBConn {
                     rs.getString("email"),
                     rs.getString("phone"),
                     rs.getString("insuranceID"),
-                    "",
-                    0.0,
-                    "",
-                    ""
+                    getPatientConditions(rs.getString("ssn"))
                 ));
             }
         } catch (SQLException e) {
@@ -110,13 +107,13 @@ public class PatientImpl extends DBConn {
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, patient.name);
-            stmt.setString(2, patient.dob);
-            stmt.setString(3, String.valueOf(patient.bioSex));
-            stmt.setString(4, patient.email);
-            stmt.setString(5, patient.phone);
-            stmt.setString(6, patient.insID);
-            stmt.setString(7, patient.ssn);
+            stmt.setString(1, patient.getName());
+            stmt.setString(2, patient.getDob());
+            stmt.setString(3, String.valueOf(patient.getBioSex()));
+            stmt.setString(4, patient.getEmail());
+            stmt.setString(5, patient.getPhone());
+            stmt.setString(6, patient.getInsID());
+            stmt.setString(7, patient.getSsn());
 
             stmt.executeUpdate();
         } catch (SQLException e) {

@@ -1,4 +1,3 @@
-
 public class Patient {
 
     private String ssn;
@@ -10,6 +9,7 @@ public class Patient {
     private String insID;
     private String conditions;
 
+    // main constructor used for creating patient, creates insurance plan (if applicable) at the same time
     public Patient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String insProvider, double insPercent, String insPlan, String conditions){
         this.ssn = ssn;
         this.name = name;
@@ -19,8 +19,8 @@ public class Patient {
         this.phone = phone;
         this.insID = insID;
         if (this.insID != null) {
-            InsurancePlan insurance = new InsurancePlan(insID, insProvider, insPercent, insPlan);
-            InsurancePlanImpl insuranceDAO = new InsurancePlanImpl();
+            InsurancePolicy insurance = new InsurancePolicy(insID, insProvider, insPercent, insPlan);
+            InsurancePolicyImpl insuranceDAO = new InsurancePolicyImpl();
             insuranceDAO.addInsurancePlan(insurance);
         }
         

@@ -1,11 +1,11 @@
-public class InsurancePlan  {
+public class InsurancePolicy  {
     
     private String insID;
     private String insProvider;
     private double insPercent;
     private String planType;
 
-    public InsurancePlan(String insID, String insProvider, double insPercent, String planType) {
+    public InsurancePolicy(String insID, String insProvider, double insPercent, String planType) {
         this.insID = insID;
         this.insProvider = insProvider;
         this.insPercent = insPercent;
