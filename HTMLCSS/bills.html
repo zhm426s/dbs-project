@@ -5,14 +5,14 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="styles.css">
     </head>
-    <!--Functions: (bill auto-created for every stay, treatments auto-added to bill when ordered) view billing history (w filters), view + print bill for patient (calc oop costs included), manually edit bill, delete bill record -->    <body>
+    <!--Functions: (bill auto-created for every stay, treatments auto-added to bill when ordered) view billing history (w filters), view + print bill for patient (calc oop costs included), delete bill record -->    <body>
         <header>
             <h1>Billing Directory</h1>
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
             <div id="search-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="ssn">Patient SSN:</label><br>
@@ -20,27 +20,33 @@
                     </div>
                     <div class="search-field">
                         <label for="name">Patient Name:</label><br>
-                        <input type="text" id="name" name="name" value="e.g. John, Doe, John Doe">
+                        <input type="text" id="name" name="name" placeholder="e.g. John, Doe, John Doe">
                     </div>
                     <div class="search-field">
                         <label for="stayid">Stay ID: </label><br>
-                        <input type="text" id="stayid" name="stayid" value="e.g. 2">
+                        <input type="text" id="stayid" name="stayid" placeholder="e.g. 2">
                     </div>
-                    <input type="submit" value="Search">
+                    <div class="search-field">
+                        <input type="submit" value="Search">
+                        <input type="reset" value="Clear Search">
+                    </div>
                 </form>
             </div>
             <div id="filter-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="minTot">Minimum Total ($):</label><br>
-                        <input type="number" id="minTot" name="minTot" min="0" max="1000000" step="500">
+                        <input type="number" id="minTot" name="minTot" min="0" max="10000000" step="500">
                     </div>
                     <div class="filter-field">
                         <label for="maxTot">Maximum Total ($):</label><br>
-                        <input type="number" id="maxTot" name="maxTot" min="0" max="1000000" step="500">
+                        <input type="number" id="maxTot" name="maxTot" min="0" max="10000000" step="500">
                     </div>
-                    <input type="submit" value="Filter">
+                    <div class="filter-field">    
+                        <input type="submit" value="Filter">
+                        <input type="reset" value="Clear Filters">
+                    </div>
                 </form>
             </div>
             <div id="results">

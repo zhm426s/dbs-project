@@ -15,7 +15,7 @@
             <!--for beginning stays-->
             <button class="add-button" onclick="location.href='stayform.html';">Begin Stay</button>
             <div id="search-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="stayid">Stay ID:</label><br>
@@ -45,11 +45,14 @@
                         <label for="roomid">Room ID:</label><br>
                         <input type="text" id="roomid" name="roomid" placeholder="e.g. 2">
                     </div>
-                    <input type="submit" value="Search">
+                    <div class="search-field">
+                        <input type="submit" value="Search">
+                        <input type="reset" value="Clear Search">
+                    </div>
                 </form>
             </div>
             <div id="filter-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="ondate">Occurring on Date:</label><br>
@@ -67,7 +70,10 @@
                         <label for="deptName">Department Name:</label><br>
                         <input type="text" id="deptName" name="deptName" placeholder="e.g. Primary Care">
                     </div>       
-                    <input type="submit" value="Filter">
+                    <div class="filter-field">    
+                        <input type="submit" value="Filter">
+                        <input type="reset" value="Clear Filters">
+                    </div>
                 </form>
             </div>
             <div id="results">

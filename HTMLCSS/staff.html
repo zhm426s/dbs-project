@@ -15,7 +15,7 @@
             <!--for adding a new staff member-->
             <button class="add-button" onclick="location.href='staffform.html';">Add Staff Member</button>
             <div id="search-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Search: </p>
                     <div class="search-field">
                         <label for="empid">Employee ID:</label><br>
@@ -33,12 +33,14 @@
                         <label for="title">Title:</label><br>
                         <input type="text" id="title" name="title" placeholder="e.g. Director of Medicine">
                     </div>
-                    <input type="submit" value="Search">
-                    <input type="reset" value="Clear Search">
+                    <div class="search-field">
+                        <input type="submit" value="Search">
+                        <input type="reset" value="Clear Search">
+                    </div>
                 </form>
             </div>
             <div id="filter-form">
-                <form method="post">
+                <form class="search-filter" method="post">
                     <p>Filter: </p>
                     <div class="filter-field">
                         <label for="role">Role:</label><br>
@@ -56,13 +58,14 @@
                         <label for="deptName">Department (Name):</label><br>
                         <input type="text" id="deptName" name="deptName" placeholder="e.g. Primary Care">
                     </div>
-                    </div>
                     <div class="filter-field">
                         <label for="special">Specialization:</label><br>
                         <input type="text" id="special" name="special" placeholder="e.g. Paediatrics">
                     </div>       
-                    <input type="submit" value="Filter">
-                    <input type="reset" value="Clear Filters">
+                    <div class="filter-field">    
+                        <input type="submit" value="Filter">
+                        <input type="reset" value="Clear Filters">
+                    </div>
                 </form>
             </div>
             <div id="results">

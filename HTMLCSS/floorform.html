@@ -13,7 +13,7 @@
         </header>
         <main>
             <div id="edit-form">
-                <form method="post">
+                <form class="edit" method="post">
                     <div class="edit-field">
                         <label for="new">Is this a new floor?:</label><br>
                         <select id="new" name="new">
@@ -39,7 +39,7 @@
                     </div>
                     <div class="edit-field">
                         <label for="rrate">Daily Rate of Rooms ($):</label><br>
-                        <input type="number" id="rrate" name="rrate" min="0" max="2000" value="200" required>
+                        <input type="number" id="rrate" name="rrate" min="0" max="2000" value="200" step="0.01" required>
                     </div>
                     <input type="submit" value="Submit">
                     <input type="reset" value="Clear">

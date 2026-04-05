@@ -14,7 +14,7 @@
         </header>
         <main>
             <div id="edit-form">
-                <form method="post">
+                <form class="edit" method="post">
                     <div class="edit-field">
                         <label for="new">Is this a new treatment record?:</label><br>
                         <select id="new" name="new">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="edit-field">
                         <label for="baseCost">Base Cost ($):</label><br>
-                        <input type="number" id="baseCost" name="baseCost" min="0" max="20000" value="300" step="50" required>
+                        <input type="number" id="baseCost" name="baseCost" min="0" max="20000" value="300" step="0.01" required>
                     </div>
                     <div class="edit-field">
                         <label for="tname">Treatment Name:</label><br>
