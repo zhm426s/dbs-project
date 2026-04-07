@@ -2,12 +2,13 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DepartmentImpl extends DBConn {
+    // deptid is left out because it is autoincrement
     public void addDepartment(Department department) {
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
-            String sql = "INSERT INTO department (deptID, deptName, building) VALUES (" +
-                department.getDeptID() + ", '" + department.getDeptName() + "', '" + department.getBuilding() + "')";
+            String sql = "INSERT INTO department (deptName, building) VALUES ('" + 
+            department.getDeptName() + "', '" + department.getBuilding() + "')";
             stmt.executeUpdate(sql);
             System.out.println("Added department.");
         } catch (SQLException e) {
