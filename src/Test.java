@@ -5,6 +5,13 @@ public class Test {
     private String analyte;
     private String testName;
 
+    // for use in adding a test, where treatmentID is not yet known
+    public Test(String type, String analyte, String testName) {
+        this.type = type;
+        this.analyte = analyte;
+        this.testName = testName;
+    }
+
     public Test(int treatmentID, String type, String analyte, String testName) {
         this.treatmentID = treatmentID;
         this.type = type;

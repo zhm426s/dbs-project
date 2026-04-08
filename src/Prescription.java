@@ -1,12 +1,21 @@
 public class Prescription {
     
+    private int treatmentID;
     private String medicationName;
     private int dosage;
     private String unit;
     private String frequency;
-    private int treatmentID;
 
-    public Prescription(String medicationName, int dosage, String unit, String frequency, String description, double cost) {
+    // for use in adding a prescription, where treatmentID is not yet known
+    public Prescription(String medicationName, int dosage, String unit, String frequency) {
+        this.medicationName = medicationName;
+        this.dosage = dosage;
+        this.unit = unit;
+        this.frequency = frequency;
+    }
+
+    public Prescription(int treatmentID, String medicationName, int dosage, String unit, String frequency) {
+        this.treatmentID = treatmentID;
         this.medicationName = medicationName;
         this.dosage = dosage;
         this.unit = unit;

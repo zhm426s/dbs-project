@@ -1,8 +1,10 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 public class TreatmentImpl extends DBConn{
     // treatmentID is left out because it is autoincrement
-    // must load treatment type object first before calling
+    // must load treatment type object first before calling, use null values for unused treatment types
+    // for the treatmentid, can just load null or 0 and then get the generated key and set it in the object
     public void addTreatment(Treatment treatment, String type, Prescription prescription, Surgery surgery, Test test) {
         try {
             Connection conn = createConn();
@@ -20,17 +22,20 @@ public class TreatmentImpl extends DBConn{
                     treatment.setTreatmentID(treatmentID);
                 }
             
-            // add a switch statement for each type of treatment later
+            // depending on type of treatment, calls a different method
             switch (type) {
                 case "prescription":
+                    prescription.setTreatmentID(treatment.getTreatmentID());
                     PrescriptionImpl prescriptionImpl = new PrescriptionImpl();
                     prescriptionImpl.addPrescription(prescription);
                     break;
                 case "surgery":
+                    surgery.setTreatmentID(treatment.getTreatmentID());
                     SurgeryImpl surgeryImpl = new SurgeryImpl();
                     surgeryImpl.addSurgery(surgery);
                     break;
                 case "test":
+                    test.setTreatmentID(treatment.getTreatmentID());
                     TestImpl testImpl = new TestImpl();
                     testImpl.addTest(test);
                     break;
@@ -40,5 +45,62 @@ public class TreatmentImpl extends DBConn{
         }
     }
 
-    // leaving this for later because i think this should maybe be like insurance policy where it automatically gets created
+    public Treatment getTreatment(int treatmentID) {
+        Treatment treatment = null;
+        try {
+            Connection conn = createConn();
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM treatment WHERE treatmentID = " + treatmentID;
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                treatment = new Treatment(rs.getString("treatmentName"), rs.getString("description"), rs.getDouble("baseCost"));
+                treatment.setTreatmentID(rs.getInt("treatmentID"));
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Err: " + e.getMessage());
+        }
+        return treatment;
+    }
+
+    public ArrayList<Treatment> getAllTreatments() {
+        ArrayList<Treatment> treatments = new ArrayList<>();
+        try {
+            Connection conn = createConn();
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT * FROM treatment";
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Treatment treatment = new Treatment(rs.getString("treatmentName"), rs.getString("description"), rs.getDouble("baseCost"));
+                treatment.setTreatmentID(rs.getInt("treatmentID"));
+                treatments.add(treatment);
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Err: " + e.getMessage());
+        }
+        return treatments;
+    }
+
+    public void updateTreatment(Treatment treatment) {
+        try {
+            Connection conn = createConn();
+            Statement stmt = conn.createStatement();
+            String sql = "UPDATE treatment SET treatmentName = '" + treatment.getTreatmentName() + "', description = '" + treatment.getDescription() + "', baseCost = " + treatment.getBaseCost() + " WHERE treatmentID = " + treatment.getTreatmentID();
+            stmt.executeUpdate(sql);
+            System.out.println("Updated treatment.");
+        } catch (SQLException e) {
+            System.out.println("SQL Err: " + e.getMessage());
+        }
+    }
+
+    public void deleteTreatment(int treatmentID) {
+        try {
+            Connection conn = createConn();
+            Statement stmt = conn.createStatement();
+            String sql = "DELETE FROM treatment WHERE treatmentID = " + treatmentID;
+            stmt.executeUpdate(sql);
+            System.out.println("Deleted treatment.");
+        } catch (SQLException e) {
+            System.out.println("SQL Err: " + e.getMessage());
+        }
+    }
 }

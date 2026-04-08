@@ -1,20 +1,26 @@
 public class Surgery {
     
-    private String treatmentID;
+    private int treatmentID;
     private String bodyLocation;
     private int surgeonID;
 
-    public Surgery(String treatmentID, String bodyLocation, int surgeonID) {
+    // for use in addSurgrery, where treatmentID is not yet known
+    public Surgery(String bodyLocation, int surgeonID) {
+        this.bodyLocation = bodyLocation;
+        this.surgeonID = surgeonID;
+    }
+
+    public Surgery(int treatmentID, String bodyLocation, int surgeonID) {
         this.treatmentID = treatmentID;
         this.bodyLocation = bodyLocation;
         this.surgeonID = surgeonID;
     }
 
-    public String getTreatmentID() {
+    public int getTreatmentID() {
         return treatmentID;
     }
 
-    public void setTreatmentID(String treatmentID) {
+    public void setTreatmentID(int treatmentID) {
         this.treatmentID = treatmentID;
     }
 
