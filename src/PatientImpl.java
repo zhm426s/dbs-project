@@ -2,6 +2,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class PatientImpl extends DBConn {
+    // make insurance policy be added in here, not the constructor
     public void addPatient(Patient patient) {
         // parse condition array
         String[] conditionArr = patient.getConditions().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
