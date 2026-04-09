@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class DepartmentImpl extends DBConn {
     // deptid is left out because it is autoincrement
     public void addDepartment(Department department) {
+        String[] floornoArr = department.getFloorno().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
@@ -11,6 +12,16 @@ public class DepartmentImpl extends DBConn {
             department.getDeptName() + "', '" + department.getBuilding() + "')";
             stmt.executeUpdate(sql);
             System.out.println("Added department.");
+
+            // add floornos
+            int i;
+            for (i = 0; i < floornoArr.length; i++) {
+                Statement addfloornoStmt = conn.createStatement();
+                String addFloorno = "INSERT INTO floorno_ (deptID, floorno) " +
+                "VALUES ('"+ department.getDeptID() +"', '"+ floornoArr[i] +"')";
+                addfloornoStmt.executeUpdate(addFloorno);
+                System.out.println("Added floorno.");
+            }
         } catch (SQLException e) {
             System.out.println("SQL Err: " + e.getMessage());
         }
@@ -28,13 +39,32 @@ public class DepartmentImpl extends DBConn {
                 return new Department(
                     rs.getInt("deptID"),
                     rs.getString("deptName"),
-                    rs.getString("building")
+                    rs.getString("building"),
+                    getFloornos(rs.getInt("deptID"))
                 );
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public String getFloornos(int deptID) {
+        String sql = "SELECT floorno FROM floorno_ WHERE deptID = ?";
+        StringBuilder floornos = new StringBuilder();
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, deptID);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                floornos.append(rs.getString("floorno")).append(", ");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return floornos.toString();
     }
 
     public ArrayList<Department> getAllDepartments() {
@@ -48,7 +78,8 @@ public class DepartmentImpl extends DBConn {
                 departments.add(new Department(
                     rs.getInt("deptID"),
                     rs.getString("deptName"),
-                    rs.getString("building")
+                    rs.getString("building"),
+                    getFloornos(rs.getInt("deptID"))
                 ));
             }
         } catch (SQLException e) {
@@ -70,10 +101,46 @@ public class DepartmentImpl extends DBConn {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        updateFloornos(department);
+    }
+
+    // don't call this directly
+    public void updateFloornos(Department department) {
+        String[] floornoArr = department.getFloorno().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
+        String sql = "DELETE FROM floorno_ WHERE deptID=?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, department.getDeptID());
+            stmt.executeUpdate();
+
+            int i;
+            for (i = 0; i < floornoArr.length; i++) {
+                Statement addFloornoStmt = conn.createStatement();
+                String addFloorno = "INSERT INTO floorno_ (deptID, floorno) VALUES (?, ?)";
+                addFloornoStmt.executeUpdate(addFloorno);
+                System.out.println("Updated floorno.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deleteDepartment(int deptID) {
         String sql = "DELETE FROM department WHERE deptID=?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, deptID);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteFloornos(int deptID) {
+        String sql = "DELETE FROM floorno_ WHERE deptID=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

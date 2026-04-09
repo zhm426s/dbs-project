@@ -3,11 +3,13 @@ public class Department {
     private int deptID;
     private String deptName;
     private String building;
+    private String floorno;
 
-    public Department(int deptID, String deptName, String building) {
+    public Department(int deptID, String deptName, String building, String floorno) {
         this.deptID = deptID;
         this.deptName = deptName;
         this.building = building;
+        this.floorno = floorno;
     }
 
     public int getDeptID() {
@@ -34,4 +36,11 @@ public class Department {
         this.building = building;
     }
 
+    public String getFloorno() {
+        return floorno;
+    }
+
+    public void setFloorno(String floorno) {
+        this.floorno = floorno;
+    }
 }

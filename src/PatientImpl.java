@@ -120,10 +120,48 @@ public class PatientImpl extends DBConn {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
+        updatePatientConditions(patient);
+    }
+
+    // do not call this directly, just pass the full updated patient into updatePatient()
+    public void updatePatientConditions(Patient patient) {
+        String[] conditionArr = patient.getConditions().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
+        String sql = "DELETE FROM condition_ WHERE patientSSN=?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, patient.getSsn());
+            stmt.executeUpdate();
+
+            int i;
+            for (i = 0; i < conditionArr.length; i++) {
+                Statement addConditionStmt = conn.createStatement();
+                String addCondition = "INSERT INTO condition_" +
+                "(patientSSN, condition_)" +
+                "VALUES ('"+ patient.getSsn() +"', '"+ conditionArr[i] +"')";
+                addConditionStmt.executeUpdate(addCondition);
+                System.out.println("Updated condition.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void deletePatient(String ssn) {
         String sql = "DELETE FROM patient WHERE ssn=?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, ssn);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePatientConditions(String ssn) {
+        String sql = "DELETE FROM condition_ WHERE patientSSN=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
