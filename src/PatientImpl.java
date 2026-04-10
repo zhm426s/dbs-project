@@ -4,29 +4,14 @@ import java.util.ArrayList;
 public class PatientImpl extends DBConn {
     // make insurance policy be added in here, not the constructor
     public void addPatient(Patient patient) {
-        // parse condition array
-        String[] conditionArr = patient.getConditions().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
         try {
             Connection conn = createConn();
-
-            // add patient
             Statement addPatientStmt = conn.createStatement();
             String addPatient = ("INSERT INTO patient" +
                 "(ssn, name, dateOfBirth, age, bioSex, email, phone, insuranceID)" +
                 "VALUES ('"+ patient.getSsn() +"', '"+ patient.getName() +"', '"+ patient.getDob() +"', TIMESTAMPDIFF(YEAR, '"+ patient.getDob() +"', CURDATE()), '"+ patient.getBioSex() +"', '"+ patient.getEmail() +"', '"+ patient.getPhone() +"', '"+ patient.getInsID() +"')");
             addPatientStmt.executeUpdate(addPatient);
             System.out.println("Added patient.");
-
-            // add conditions
-            int i;
-            for (i = 0; i < conditionArr.length; i++) {
-                Statement addConditionStmt = conn.createStatement();
-                String addCondition = "INSERT INTO condition_" +
-                "(patientSSN, condition_)" +
-                "VALUES ('"+ patient.getSsn() +"', '"+ conditionArr[i] +"')";
-                addConditionStmt.executeUpdate(addCondition);
-                System.out.println("Added condition.");
-            }
         } catch (SQLException e) {
             System.out.println("SQL Err: " + e.getMessage());
         }
@@ -48,8 +33,7 @@ public class PatientImpl extends DBConn {
                     rs.getString("bioSex").charAt(0),
                     rs.getString("email"),
                     rs.getString("phone"),
-                    rs.getString("insuranceID"),
-                    getPatientConditions(ssn)
+                    rs.getString("insuranceID")
                 );
             }
         } catch (SQLException e) {
@@ -57,25 +41,6 @@ public class PatientImpl extends DBConn {
         }
         
         return null;
-    }
-
-    public String getPatientConditions(String ssn) {
-        StringBuilder conditions = new StringBuilder();
-        String sql = "SELECT * FROM condition_ WHERE patientSSN = ?";
-        try (Connection conn = createConn();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, ssn);
-            ResultSet rs = stmt.executeQuery();
-
-            while (rs.next()) {
-                conditions.append(rs.getString("condition_")).append(", ");
-            }
-            conditions.setLength(conditions.length() - 2); // remove trailing comma and space
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return conditions.toString();
     }
 
     public ArrayList<Patient> getAllPatients() {
@@ -93,8 +58,7 @@ public class PatientImpl extends DBConn {
                     rs.getString("bioSex").charAt(0),
                     rs.getString("email"),
                     rs.getString("phone"),
-                    rs.getString("insuranceID"),
-                    getPatientConditions(rs.getString("ssn"))
+                    rs.getString("insuranceID")
                 ));
             }
         } catch (SQLException e) {
@@ -120,33 +84,7 @@ public class PatientImpl extends DBConn {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        updatePatientConditions(patient);
-    }
-
-    // do not call this directly, just pass the full updated patient into updatePatient()
-    public void updatePatientConditions(Patient patient) {
-        String[] conditionArr = patient.getConditions().split(" *,+ *"); // regex catches 1+ commas w/ any number of spaces before/after
-        String sql = "DELETE FROM condition_ WHERE patientSSN=?";
-        try (Connection conn = createConn();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, patient.getSsn());
-            stmt.executeUpdate();
-
-            int i;
-            for (i = 0; i < conditionArr.length; i++) {
-                Statement addConditionStmt = conn.createStatement();
-                String addCondition = "INSERT INTO condition_" +
-                "(patientSSN, condition_)" +
-                "VALUES ('"+ patient.getSsn() +"', '"+ conditionArr[i] +"')";
-                addConditionStmt.executeUpdate(addCondition);
-                System.out.println("Updated condition.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    }    
 
     public void deletePatient(String ssn) {
         String sql = "DELETE FROM patient WHERE ssn=?";
