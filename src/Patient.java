@@ -7,9 +7,10 @@ public class Patient {
     private String email;
     private String phone;
     private String insID;
+    private String conditions;
 
     // main constructor used for creating patient, creates insurance plan (if applicable) at the same time
-    public Patient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String insProvider, double insPercent, String insPlan){
+    public Patient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String insProvider, double insPercent, String insPlan, String conditions){
         this.ssn = ssn;
         this.name = name;
         this.dob = dob;
@@ -22,10 +23,12 @@ public class Patient {
             InsurancePolicyImpl insuranceDAO = new InsurancePolicyImpl();
             insuranceDAO.addInsurancePlan(insurance);
         }
+        
+        this.conditions = conditions;
     }
 
     // "default" constructor for methods that don't care about insurance info
-    public Patient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID) {
+    public Patient(String ssn, String name, String dob, char bioSex, String email, String phone, String insID, String conditions) {
         this.ssn = ssn;
         this.name = name;
         this.dob = dob;
@@ -33,6 +36,8 @@ public class Patient {
         this.email = email;
         this.phone = phone;
         this.insID = insID;
+        this.conditions = conditions;
+
     }
 
     // for use in testing
@@ -93,5 +98,13 @@ public class Patient {
 
     public void setInsID(String insID) {
         this.insID = insID;
+    }
+
+    public String getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(String conditions) {
+        this.conditions = conditions;
     }
 }
