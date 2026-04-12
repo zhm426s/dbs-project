@@ -49,6 +49,30 @@ public class DepartmentImpl extends DBConn {
         return null;
     }
 
+    // needed this for auto room assignment, theres probably a way to make this more general for searching/filtering by diff columns
+    public ArrayList<Department> getDepartmentByName(String deptName) {
+        ArrayList<Department> departments = new ArrayList<>();
+        String sql = "SELECT * FROM department WHERE deptName LIKE %?%";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, deptName);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                departments.add(new Department(
+                    rs.getInt("deptID"),
+                    rs.getString("deptName"),
+                    rs.getString("building"),
+                    getFloornos(rs.getInt("deptID"))
+                ));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return departments;
+    }
+
     public String getFloornos(int deptID) {
         String sql = "SELECT floorno FROM floorno_ WHERE deptID = ?";
         StringBuilder floornos = new StringBuilder();
