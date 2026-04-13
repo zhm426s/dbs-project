@@ -22,6 +22,5 @@ public class HMSTesting {
         System.out.println("Email: " + patient.getEmail());
         System.out.println("Phone: " + patient.getPhone());
         System.out.println("Insurance ID: " + patient.getInsID());
-        System.out.println("Conditions: " + patient.getConditions());
     }
 }

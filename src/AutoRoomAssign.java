@@ -91,8 +91,7 @@ public class AutoRoomAssign {
 
             if (depts.isEmpty()){
                 // try to id department via conditions
-                ArrayList<String> conditionList = new ArrayList<String>(Arrays.asList(patient.getConditions().split(" *,+ *")));
-                conditionList.addAll(Arrays.asList(newConditions.split(" *,+ *")));
+                ArrayList<String> conditionList = new ArrayList<String>(Arrays.asList(newConditions.split(" *,+ *")));
                 ListIterator<String> li = conditionList.listIterator();
 
                 // big 2d array storing some condition regex keywords sorted by specialty
@@ -101,7 +100,7 @@ public class AutoRoomAssign {
                     {".*cancer.*", ".*\\w+oma\\s"}, // oncology
                     {".*heart.*", ".*cardi.*", ".*aneurysm.*", ".*angio.*", ".*tensi.*", ".*arrhythmia.*", ".*atrial.*", ".*blood.*", ".*arter.*", ".*ischem.*", ".*mitra.*", ".*vasc.*", ".*ventric.*"}, // cardiology
                     {".*bronch.*", ".*chest.*", ".*pulm.*", ".*lung.*", ".*pne.*"}, // pulmonology
-                    {".*fract.*", ".*cl.*", ".*arthr.*", ".*bone.*", ".*spin.*", ".*disc.*", ".*dislocat.*", ".*fasci.*", ".*hip.*", ".*joint.*", ".*knee.*", ".*labrum.*", ".*ligament.*", ".*osteo.*", ".*sciatic.*", ".*scolio.*", ".*sesam.*", ".*sprain.*", ".*tunnel.*", ".*tend.*"}, // orthopedics
+                    {".*fract.*", ".*cl.*", ".*arthr.*", ".*bone.*", ".*spin.*", ".*disc.*", ".*dislocat.*", ".*fasci.*", ".*hip.*", ".*joint.*", ".*knee.*", ".*labrum.*", ".*ligament.*", ".*osteo.*", ".*sciatic.*", ".*scolio.*", ".*sesam.*", ".*sprain.*", ".*tunnel.*", ".*tend.*", ".*back.*", ".*wrist.*", ".*elbow.*", ".*hand.*", ".*finger.*", ".*arm.*", ".*leg.*", ".*foot.*"}, // orthopedics
                     {".*gnos.*", ".*phas.*", ".*nerv.*", ".*brain.*", ".*cere.*", ".*chorea.*", ".*enceph.*", ".*myel.*", ".*ton.*", ".*neur.*", ".*sthes.*", ".*paral.*", ".*syn.*", ".*kine.*"}, // neurology
                     {".*meno.*", ".*ov.*", ".*pregnan.*", ".*hyster.*"} // gynecology
                 }; 
