@@ -7,6 +7,15 @@ public class Staff {
     private String specialization;
     private int deptID;
 
+    // for use in adding
+    public Staff(String name, String address, String title, String specialization, int deptID) {
+        this.name = name;
+        this.address = address;
+        this.title = title;
+        this.specialization = specialization;
+        this.deptID = deptID;
+    }
+
     public Staff(int empID, String name, String address, String title, String specialization, int deptID) {
         this.empID = empID;
         this.name = name;
