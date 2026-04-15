@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Hospital MS- Home</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <h1>Hospital Management System</h1>
+        </header>
+        <main>
+            <h2>Select Directory: </h2>
+            <div id="directory-list">
+                <button class="directory-button" onclick="location.href='patients.jsp';">Patient Directory</button>
+                    <!--Functions: add patient, search patients (w filters), edit patient info, remove patient, view treatment history, set insurance, change insurance, remove insurance-->
+                <button class="directory-button" onclick="location.href='staff.html';">Staff Directory</button>
+                    <!--Functions: add staff, search staff (w filters), edit staff info, remove staff, view staff treatment history-->
+                <button class="directory-button" onclick="location.href='departments.html';">Department Directory</button>
+                    <!--Functions: add department, view departments, edit dept info, remove department-->
+                <button class="directory-button" onclick="location.href='rooms.html';">Room Directory</button>
+                    <!--Functions: add floor (w/ all rooms), search current room occupancy, remove room(s)-->
+                <button class="directory-button" onclick="location.href='stays.html';">Stay Directory</button>
+                    <!--Functions: begin stay (sp patient or make new), end stay, search current/past stays (w filters), (assign/unassign, auto assign rooms: part of beginning stay)-->
+                <button class="directory-button" onclick="location.href='treatments.html';">Treatment Directory</button>
+                    <!--Functions: order treatment, search treatment records (w filters), edit treatment record, edit test results, remove test record-->
+                <button class="directory-button" onclick="location.href='bills.html';">Billing</button>
+                    <!--Functions: (bill auto-created for every stay, treatments auto-added to bill when ordered) view billing history (w filters), view + print bill for patient (calc oop costs included), manually edit bill, delete bill record -->
+            </div>
+        </main>
+    </body>
+</html>
