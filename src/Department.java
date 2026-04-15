@@ -5,6 +5,13 @@ public class Department {
     private String building;
     private String floorno;
 
+    // for use in adding
+    public Department(String deptName, String building, String floorno) {
+        this.deptName = deptName;
+        this.building = building;
+        this.floorno = floorno;
+    } 
+
     public Department(int deptID, String deptName, String building, String floorno) {
         this.deptID = deptID;
         this.deptName = deptName;

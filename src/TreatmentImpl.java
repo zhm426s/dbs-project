@@ -4,7 +4,6 @@ import java.util.ArrayList;
 public class TreatmentImpl extends DBConn{
     // treatmentID is left out because it is autoincrement
     // must load treatment type object first before calling, use null values for unused treatment types
-    // for the treatmentid, can just load null or 0 and then get the generated key and set it in the object
     public void addTreatment(Treatment treatment, String type, Prescription prescription, Surgery surgery, Test test) {
         try {
             Connection conn = createConn();
@@ -84,7 +83,10 @@ public class TreatmentImpl extends DBConn{
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
-            String sql = "UPDATE treatment SET treatmentName = '" + treatment.getTreatmentName() + "', description = '" + treatment.getDescription() + "', baseCost = " + treatment.getBaseCost() + " WHERE treatmentID = " + treatment.getTreatmentID();
+            String sql = "UPDATE treatment SET treatmentName = '" + treatment.getTreatmentName() +
+            "', description = '" + treatment.getDescription() +
+            "', baseCost = " + treatment.getBaseCost() +
+            " WHERE treatmentID = " + treatment.getTreatmentID();
             stmt.executeUpdate(sql);
             System.out.println("Updated treatment.");
         } catch (SQLException e) {

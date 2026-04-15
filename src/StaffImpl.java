@@ -1,7 +1,7 @@
 import java.sql.*;
 import java.util.ArrayList;
 
-public class StaffImpl  extends DBConn {
+public class StaffImpl extends DBConn {
     // empid is omitted because automincrement
     public void addStaff(Staff staff) {
         try {
