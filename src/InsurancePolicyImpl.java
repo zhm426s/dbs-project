@@ -16,12 +16,12 @@ public class InsurancePolicyImpl extends DBConn {
         }
     }
 
-    public InsurancePolicy getInsurancePolicy(int insuranceID) {
+    public InsurancePolicy getInsurancePolicy(String insuranceID) {
         String sql = "SELECT * FROM insurancepolicy WHERE insuranceID = ?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, insuranceID);
+            stmt.setString(1, insuranceID);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
@@ -75,12 +75,12 @@ public class InsurancePolicyImpl extends DBConn {
         }
     }
 
-    public void deleteInsurancePolicy(int insuranceID) {
+    public void deleteInsurancePolicy(String insuranceID) {
         String sql = "DELETE FROM insurancepolicy WHERE insuranceID=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, insuranceID);
+            stmt.setString(1, insuranceID);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

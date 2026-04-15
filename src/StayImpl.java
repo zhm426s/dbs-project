@@ -50,6 +50,10 @@ public class StayImpl extends DBConn {
         } catch (SQLException e) {
             System.out.println("SQL Err: " + e.getMessage());
         }
+
+        BillImpl billDAO = new BillImpl();
+        Bill stayBill = billDAO.calculateBill(stay);
+        billDAO.addBill(stayBill);
     }
 
     public String getStayConditions(int stayID) {
@@ -99,7 +103,7 @@ public class StayImpl extends DBConn {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Stay stay = new Stay(rs.getInt("stayID"),
-                rs.getInt("patientSSN"),
+                rs.getString("patientSSN"),
                 rs.getDate("startDate"),
                 rs.getDate("endDate"),
                 rs.getInt("length"),

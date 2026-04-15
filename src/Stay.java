@@ -3,7 +3,7 @@ import java.util.Date;
 public class Stay {
     
     private int stayID;
-    private int patientSSN;
+    private String patientSSN;
     private Date startDate;
     private Date endDate;
     private int length;
@@ -13,7 +13,7 @@ public class Stay {
     private String treatments;
 
     // for use in adding (stayid is autoincrement)
-    public Stay(int patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions, String treatments) {
+    public Stay(String patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions, String treatments) {
         this.patientSSN = patientSSN;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -24,7 +24,7 @@ public class Stay {
         this.treatments = treatments;
     }
 
-    public Stay(int stayID, int patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions, String treatments) {
+    public Stay(int stayID, String patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions, String treatments) {
         this.stayID = stayID;
         this.patientSSN = patientSSN;
         this.startDate = startDate;
@@ -44,11 +44,11 @@ public class Stay {
         this.stayID = stayID;
     }
 
-    public int getPatientSSN() {
+    public String getPatientSSN() {
         return patientSSN;
     }
 
-    public void setPatientSSN(int patientSSN) {
+    public void setPatientSSN(String patientSSN) {
         this.patientSSN = patientSSN;
     }
 
