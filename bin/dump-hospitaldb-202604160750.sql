@@ -28,7 +28,6 @@ CREATE TABLE `bill` (
   `stayID` int unsigned NOT NULL,
   `insuranceID` varchar(20) DEFAULT NULL,
   `roomCost` decimal(12,2) NOT NULL DEFAULT '0.00',
-  `treatmentID` int unsigned DEFAULT NULL,
   `treatmentCost` decimal(12,2) NOT NULL DEFAULT '0.00',
   `subtotal` decimal(12,2) NOT NULL DEFAULT '0.00',
   `insCoverageAmount` decimal(12,2) NOT NULL DEFAULT '0.00',
@@ -38,11 +37,9 @@ CREATE TABLE `bill` (
   KEY `fk_Bill_Patient` (`patientSSN`),
   KEY `fk_Bill_Stay` (`stayID`),
   KEY `fk_Bill_Insurance` (`insuranceID`),
-  KEY `fk_Bill_Treatment` (`treatmentID`),
   CONSTRAINT `fk_Bill_Insurance` FOREIGN KEY (`insuranceID`) REFERENCES `insurancepolicy` (`insuranceID`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `fk_Bill_Patient` FOREIGN KEY (`patientSSN`) REFERENCES `patient` (`ssn`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_Bill_Stay` FOREIGN KEY (`stayID`) REFERENCES `stay` (`stayID`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `fk_Bill_Treatment` FOREIGN KEY (`treatmentID`) REFERENCES `treatment` (`treatmentID`) ON DELETE SET NULL ON UPDATE CASCADE
+  CONSTRAINT `fk_Bill_Stay` FOREIGN KEY (`stayID`) REFERENCES `stay` (`stayID`) ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -483,4 +480,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-04-10 18:31:47
+-- Dump completed on 2026-04-16  7:50:34
