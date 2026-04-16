@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BillImpl extends DBConn {
 
@@ -22,14 +23,31 @@ public class BillImpl extends DBConn {
         InsurancePolicyImpl insuranceDAO = new InsurancePolicyImpl();
         InsurancePolicy patientInsurance = insuranceDAO.getInsurancePolicy(insuranceID);
 
-        double roomCost = 0.0; // fix this later
-        double treatmentCost = 0.0; // fix this later
-        double subtotal = roomCost + treatmentCost;
-        double insuranceCoverageAmount = subtotal * patientInsurance.getInsPercent(); // coverage percentage
-        double taxAmount = subtotal * 0.089; // 8.9% sales tax in Atlanta
-        double totalDue = subtotal - insuranceCoverageAmount + taxAmount;
+        RoomImpl roomDAO = new RoomImpl();
+        Room room = roomDAO.getRoom(stay.getRoomUsed());
+        double roomCost = room.getDailyRate() * stay.getLength();
 
-        
+        StayImpl stayDAO = new StayImpl();
+        String[] treatmentArr = stayDAO.getStayTreatments(stay.getStayID()).split(", ");
+        // getStayTreatments returns a comma-separated string, so we need to convert it to int
+        int[] intArray = Arrays.stream(treatmentArr)
+                       .map(String::trim)
+                       .mapToInt(Integer::parseInt)
+                       .toArray();
+        double treatmentCost = 0.0;
+        for (int treatmentID : intArray) {
+            TreatmentImpl treatmentDAO = new TreatmentImpl();
+            Treatment treatment = treatmentDAO.getTreatment(treatmentID);
+            treatmentCost += treatment.getBaseCost();
+        }
+
+        double subtotal = roomCost + treatmentCost;
+
+        double insuranceCoverageAmount = subtotal * patientInsurance.getInsPercent();
+
+        double taxAmount = subtotal * 0.089;
+
+        double totalDue = subtotal - insuranceCoverageAmount + taxAmount;
         
         return new Bill(stay.getPatientSSN(), stay.getStayID(), insuranceID, roomCost, treatmentCost, subtotal, insuranceCoverageAmount, taxAmount, totalDue);
     }
@@ -53,6 +71,7 @@ public class BillImpl extends DBConn {
                     bill.getTotalDue() +")";
             stmt.executeUpdate(sql);
         } catch (Exception e) {
+            System.out.println("SQL Err: " + e.getMessage());
         }
     }
 

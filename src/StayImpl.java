@@ -41,7 +41,7 @@ public class StayImpl extends DBConn {
             for (i = 0; i < treatmentArr.length; i++) {
                 Statement addTreatmentStmt = conn.createStatement();
                 String addTreatment = "INSERT INTO staytreatment" +
-                "(stayID, treatment_)" +
+                "(stayID, treatmentID)" +
                 "VALUES ("+ stay.getStayID() +", '"+ treatmentArr[i] +"')";
                 addTreatmentStmt.executeUpdate(addTreatment);
                 System.out.println("Added treatment.");
@@ -83,7 +83,7 @@ public class StayImpl extends DBConn {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                treatments.append(rs.getString("staytreatment")).append(", ");
+                treatments.append(rs.getString("treatmentID")).append(", ");
             }
             if (treatments.length() > 0) {
                 treatments.setLength(treatments.length() - 2); // remove trailing comma and space
@@ -178,7 +178,7 @@ public class StayImpl extends DBConn {
             for (i = 0; i < treatmentArr.length; i++) {
                 Statement addTreatmentStmt = conn.createStatement();
                 String addTreatment = "INSERT INTO staytreatment" +
-                "(stayID, treatment_)" +
+                "(stayID, treatmentID)" +
                 "VALUES ('"+ stay.getStayID() +"', '"+ treatmentArr[i] +"')";
                 addTreatmentStmt.executeUpdate(addTreatment);
                 System.out.println("Updated treatment.");
