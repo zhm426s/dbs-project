@@ -71,6 +71,22 @@ public class PatientImpl extends DBConn {
         }
         return patients;
     }
+    
+    public int getCountPatients() {
+    	int count = 0;
+    	String sql = "SELECT COUNT(*) FROM patient";
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt("COUNT(*)");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public void updatePatient(Patient patient) {
         String sql = "UPDATE patient SET name=?, dateOfBirth=?, bioSex=?, email=?, phone=?, insuranceID=? WHERE ssn=?";

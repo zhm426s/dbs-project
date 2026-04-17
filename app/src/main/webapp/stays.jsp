@@ -125,6 +125,7 @@ if (isNew != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Stay Records in System: <%=stayDAO.getCountStays() %></p>
             <!--for beginning stays-->
             <button class="add-button" onclick="location.href='stayform.jsp';">Begin Stay</button>
             <div id="search-form">

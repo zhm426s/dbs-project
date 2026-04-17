@@ -71,6 +71,7 @@ if (isNew != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Staff in System: <%=staffDAO.getCountStaff() %></p>
             <!--for adding a new staff member-->
             <button class="add-button" onclick="location.href='staffform.jsp';">Add Staff Member</button>
             <div id="search-form">

@@ -64,6 +64,22 @@ public class StaffImpl  extends DBConn {
         }
         return staffList;
     }
+    
+    public int getCountStaff() {
+    	int count = 0;
+    	String sql = "SELECT COUNT(*) FROM staff";
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt("COUNT(*)");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public void updateStaff(Staff staff) {
         String sql = "UPDATE staff SET name=?, address=?, title=?, specialization=?, deptID=? WHERE empID=?";

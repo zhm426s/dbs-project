@@ -12,7 +12,7 @@
     <body>
         <header>
             <h1>Enter Bill Information</h1>
-            <button class="directory-button" onclick="location.href='bills.html';">Back to Billing</button>
+            <button class="directory-button" onclick="location.href='bills.jsp';">Back to Billing</button>
         </header>
         <main>
         <%

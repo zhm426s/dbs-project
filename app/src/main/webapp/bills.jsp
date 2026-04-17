@@ -72,6 +72,7 @@ if (edit != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Bills in System: <%=billDAO.getCountBills() %></p>
             <div id="search-form">
                 <form class="search-filter" method="post">
                     <p>Search: </p>

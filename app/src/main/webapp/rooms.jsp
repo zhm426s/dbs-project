@@ -103,6 +103,7 @@ if (isNew != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Rooms in System: <%=roomDAO.getCountRooms() %></p>
             <!--for adding a new floor or room-->
             <div id="actions">
                 <button class="add-button" onclick="location.href='floorform.jsp';">Add Floor</button>

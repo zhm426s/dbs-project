@@ -113,6 +113,22 @@ public class DepartmentImpl extends DBConn {
         }
         return departments;
     }
+    
+    public int getCountDepartments() {
+    	int count = 0;
+    	String sql = "SELECT COUNT(*) FROM department";
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt("COUNT(*)");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public void updateDepartment(Department department) {
         String sql = "UPDATE department SET deptName=?, building=? WHERE deptID=?";

@@ -161,6 +161,22 @@ public class StayImpl extends DBConn {
         }
         return stays;
     }
+    
+    public int getCountStays() {
+    	int count = 0;
+    	String sql = "SELECT COUNT(*) FROM stay";
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt("COUNT(*)");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public void updateStay(Stay stay) {
         try {

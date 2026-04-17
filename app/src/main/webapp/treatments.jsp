@@ -152,6 +152,7 @@ if (isNew != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Treatments in System: <%=treatDAO.getCountTreatments() %></p>
             <div id="actions">
                 <!--for ordering a new treatment-->
                 <button class="add-button" onclick="location.href='treatmentform.jsp';">Order New Treatment</button>
@@ -300,7 +301,7 @@ if (isNew != null){
                     		surgeonName = surgeonT.getName();
                     		bodyLocation = surgT.getBodyLocation();
                     	} else if (testT != null){
-                    		ttype = "Type";
+                    		ttype = "Test";
                     		ttypeU = "t";
                     		
                     		testName = testT.getTestName();

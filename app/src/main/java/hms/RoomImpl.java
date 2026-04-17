@@ -70,6 +70,22 @@ public class RoomImpl extends DBConn {
         }
         return rooms;
     }
+    
+    public int getCountRooms() {
+    	int count = 0;
+    	String sql = "SELECT COUNT(*) FROM room";
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            if (rs.next()) {
+                count = rs.getInt("COUNT(*)");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
 
     public void updateRoom(Room room) {
         String sql = "UPDATE room SET building=?, floorNo=?, roomNo=?, status=?, dailyRate=?, deptID=? WHERE roomID=?";

@@ -106,6 +106,7 @@ if (isNew != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Patients in System: <%=patientDAO.getCountPatients() %></p>
             <!--for adding a new patient-->
             <button class="add-button" onclick="location.href='patientform.jsp';">Add Patient</button>
             <div id="search-form">
@@ -204,7 +205,7 @@ if (isNew != null){
                     	patientResults = FilterUtil.filter(patientResults, p -> ((insPolDAO.getInsurancePolicy(p.getInsID())).getInsProvider().matches(".*" + insurer.toString() + ".*")));
                     }
                     if (fsex){
-                    	patientResults = FilterUtil.filter(patientResults, p -> p.getBioSex() == bioSexStr.charAt(0));
+                    	patientResults = FilterUtil.filter(patientResults, p -> Character.toUpperCase(p.getBioSex()) == Character.toUpperCase(bioSexStr.charAt(0)));
                     }
                    	if (fminAge){
                        	patientResults = FilterUtil.filter(patientResults, p -> p.getDob().compareTo(minDOB.toString()) >= 0);

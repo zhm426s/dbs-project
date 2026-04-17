@@ -135,8 +135,23 @@ public class BillImpl extends DBConn {
         }
         return bills;
     }
+    
+    public int getCountBills() {
+    	int count = 0;
+    	String sql = "SELECT COUNT(*) FROM bill";
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
-    //unsure if this should even exist
+            if (rs.next()) {
+                count = rs.getInt("COUNT(*)");   
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
     public void updateBill(Bill bill) {
     	System.out.println("update bill");
         try {

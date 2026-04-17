@@ -58,6 +58,7 @@ if (isNew != null){
             <button class="directory-button" onclick="location.href='index.html';">Back to Home</button>
         </header>
         <main>
+        <p>Total Departments in System: <%=deptDAO.getCountDepartments() %></p>
             <!--for adding a new dept-->
             <button class="add-button" onclick="location.href='departmentform.jsp';">Add Department</button>
             <div id="search-form">
