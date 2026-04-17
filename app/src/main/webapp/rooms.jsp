@@ -214,7 +214,7 @@ if (isNew != null){
                                 "<td>"+r.getFloorNo()+"</td>" +
                                 "<td>"+r.getBuilding()+"</td>" +
                                 "<td>"+r.getStatus()+"</td>" +
-                                "<td>"+r.getDailyRate()+"</td>" +
+                                "<td>$"+r.getDailyRate()+"</td>" +
                                 "<td>"+deptR.getDeptID() + ", "+ deptR.getDeptName()+"</td>" +
                                 "<td class=\"update\"><form action=\"roomform.jsp\" method=\"post\"><button class=\"update-button\" type=\"submit\" value=\"r"+r.getRoomID()+"\" name=\"update\">Update</button></form></td>" +
                                 "<td class=\"update\"><form action=\"floorform.jsp\" method=\"post\"><button class=\"update-button\" type=\"submit\" value=\""+r.getFloorNo()+"\" name=\"update\">Update Floor</button></form></td>" +

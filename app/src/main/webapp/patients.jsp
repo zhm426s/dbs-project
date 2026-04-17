@@ -172,7 +172,6 @@ if (isNew != null){
                 <table id="results-table">
                     <tr>
                         <th>Name</th>
-                        <th>Currently Staying?</th> <!--Room number, or No-->
                         <th>Date of Birth</th>
                         <th>Sex</th>
                         <th>Email Address</th>
@@ -218,7 +217,6 @@ if (isNew != null){
                     	InsurancePolicy insP = insPolDAO.getInsurancePolicy(p.getInsID());
                     	allRows.append("<tr>" +
                                 "<td>"+p.getName()+"</td>" +
-                                "<td>[placeholder]</td>" +
                                 "<td>"+p.getDob()+"</td>" +
                                 "<td>"+p.getBioSex()+"</td>" +
                                 "<td>"+p.getEmail()+"</td>" +

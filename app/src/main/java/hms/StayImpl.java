@@ -27,6 +27,7 @@ public class StayImpl extends DBConn {
                     int stayID = rs.getInt(1);
                     stay.setStayID(stayID);
                 }
+                stay.setStayID(getStayID(stay));
 
             // add conditions
             int i;
@@ -40,14 +41,15 @@ public class StayImpl extends DBConn {
             }
             
          // add treatments
-            for (i = 0; i < treatmentArr.length; i++) {
+            
+            /* commented bc no treatments are added at beginning of stay: for (i = 0; i < treatmentArr.length; i++) {
                 Statement addTreatmentStmt = conn.createStatement();
                 String addTreatment = "INSERT INTO staytreatment" +
                 "(stayID, treatmentID)" +
                 "VALUES ("+ stay.getStayID() +", '"+ treatmentArr[i] +"')";
                 addTreatmentStmt.executeUpdate(addTreatment);
                 System.out.println("Added treatment.");
-            }
+            } */
             System.out.println("Added stay.");
         } catch (SQLException e) {
             System.out.println("SQL Err: " + e.getMessage());
@@ -55,6 +57,23 @@ public class StayImpl extends DBConn {
         BillImpl billDAO = new BillImpl();
         Bill stayBill = billDAO.calculateBill(stay);
         billDAO.addBill(stayBill);
+    }
+    
+    public int getStayID(Stay stay) {
+    	int stayID = 0;
+    	try {
+    		Connection conn =createConn();
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT stayID FROM stay WHERE patientSSN = '"+ stay.getPatientSSN() + "' AND startDate = '" + stay.getStartDate() + "'";
+            ResultSet rs = stmt.executeQuery(sql);
+            if (rs.next()) {
+                stayID = rs.getInt("stayID");
+            }
+            
+    	} catch (SQLException e) {
+            System.out.println("SQL Err: " + e.getMessage());
+        }
+    	return stayID;
     }
     
     public Stay getStay(int stayID) {
@@ -170,50 +189,54 @@ public class StayImpl extends DBConn {
 
     // do not call directly
     public void updateStayConditions(Stay stay) {
-        String[] conditionArr = stay.getConditions().split(" *,+ *");
-        String sql = "DELETE FROM condition_ WHERE stayID=?";
-        try (Connection conn = createConn();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, String.valueOf(stay.getStayID()));
-            stmt.executeUpdate();
-
-            int i;
-            for (i = 0; i < conditionArr.length; i++) {
-                Statement addConditionStmt = conn.createStatement();
-                String addCondition = "INSERT INTO condition_" +
-                "(stayID, condition_)" +
-                "VALUES ('"+ stay.getStayID() +"', '"+ conditionArr[i] +"')";
-                addConditionStmt.executeUpdate(addCondition);
-                System.out.println("Updated condition.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    	if (!stay.getConditions().equals("")){
+	        String[] conditionArr = stay.getConditions().split(" *,+ *");
+	        String sql = "DELETE FROM condition_ WHERE stayID=?";
+	        try (Connection conn = createConn();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+	
+	            stmt.setString(1, String.valueOf(stay.getStayID()));
+	            stmt.executeUpdate();
+	
+	            int i;
+	            for (i = 0; i < conditionArr.length; i++) {
+	                Statement addConditionStmt = conn.createStatement();
+	                String addCondition = "INSERT INTO condition_" +
+	                "(stayID, condition_)" +
+	                "VALUES ('"+ stay.getStayID() +"', '"+ conditionArr[i] +"')";
+	                addConditionStmt.executeUpdate(addCondition);
+	                System.out.println("Updated condition.");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+    	}
     }
     
  // do not call directly
     public void updateStayTreatments(Stay stay) {
-        String[] treatmentArr = stay.getTreatments().split(" *,+ *");
-        String sql = "DELETE FROM staytreatment WHERE stayID=?";
-        try (Connection conn = createConn();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
-
-            stmt.setString(1, String.valueOf(stay.getStayID()));
-            stmt.executeUpdate();
-
-            int i;
-            for (i = 0; i < treatmentArr.length; i++) {
-                Statement addTreatmentStmt = conn.createStatement();
-                String addTreatment = "INSERT INTO staytreatment" +
-                "(stayID, treatmentID)" +
-                "VALUES ('"+ stay.getStayID() +"', '"+ treatmentArr[i] +"')";
-                addTreatmentStmt.executeUpdate(addTreatment);
-                System.out.println("Updated treatment.");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    	if (!stay.getTreatments().equals("")){
+	        String[] treatmentArr = stay.getTreatments().split(" *,+ *");
+	        String sql = "DELETE FROM staytreatment WHERE stayID=?";
+	        try (Connection conn = createConn();
+	             PreparedStatement stmt = conn.prepareStatement(sql)) {
+	
+	            stmt.setString(1, String.valueOf(stay.getStayID()));
+	            stmt.executeUpdate();
+	
+	            int i;
+	            for (i = 0; i < treatmentArr.length; i++) {
+	                Statement addTreatmentStmt = conn.createStatement();
+	                String addTreatment = "INSERT INTO staytreatment" +
+	                "(stayID, treatmentID)" +
+	                "VALUES ('"+ stay.getStayID() +"', '"+ treatmentArr[i] +"')";
+	                addTreatmentStmt.executeUpdate(addTreatment);
+	                System.out.println("Updated treatment.");
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+    	}
     }
 
     public void deleteStay(int stayID) {

@@ -13,7 +13,7 @@ public class BillImpl extends DBConn {
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
-            String sql = "SELECT insuranceID, coveragePercent FROM insurance WHERE insID = (SELECT insuranceID FROM patient WHERE ssn='" + stay.getPatientSSN() + "')";
+            String sql = "SELECT insuranceID, coveragePercent FROM insurancepolicy WHERE insuranceID = (SELECT insuranceID FROM patient WHERE ssn='" + stay.getPatientSSN() + "')";
             ResultSet rs = stmt.executeQuery(sql);
             if (rs.next()) {
                 insuranceID = rs.getString("insuranceID");
@@ -30,22 +30,28 @@ public class BillImpl extends DBConn {
         double roomCost = room.getDailyRate() * stay.getLength();
 
         StayImpl stayDAO = new StayImpl();
-        String[] treatmentArr = stayDAO.getStayTreatments(stay.getStayID()).split(", ");
+        String[] treatmentArr = stayDAO.getStayTreatments(stay.getStayID()).split(",");
         // getStayTreatments returns a comma-separated string, so we need to convert it to int
-        int[] intArray = Arrays.stream(treatmentArr)
-                       .map(String::trim)
-                       .mapToInt(Integer::parseInt)
-                       .toArray();
         double treatmentCost = 0.0;
-        for (int treatmentID : intArray) {
-            TreatmentImpl treatmentDAO = new TreatmentImpl();
-            Treatment treatment = treatmentDAO.getTreatment(treatmentID);
-            treatmentCost += treatment.getBaseCost();
+        if (!treatmentArr[0].equals("")) {
+        	System.out.println("getting treat cost");
+	        int[] intArray = Arrays.stream(treatmentArr)
+	                       .map(String::trim)
+	                       .mapToInt(Integer::parseInt)
+	                       .toArray();
+	        for (int treatmentID : intArray) {
+	            TreatmentImpl treatmentDAO = new TreatmentImpl();
+	            Treatment treatment = treatmentDAO.getTreatment(treatmentID);
+	            treatmentCost += treatment.getBaseCost();
+	        }
         }
 
         double subtotal = roomCost + treatmentCost;
 
-        double insuranceCoverageAmount = subtotal * patientInsurance.getInsPercent();
+        double insuranceCoverageAmount = 0.0;
+        if (patientInsurance != null) {
+        	insuranceCoverageAmount = subtotal * patientInsurance.getInsPercent();
+        }
 
         double taxAmount = subtotal * 0.089;
 
@@ -56,15 +62,16 @@ public class BillImpl extends DBConn {
 
     // should only be called by addStay (?)
     public void addBill(Bill bill) {
+    	System.out.println("add bill");
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
 
             String sql = "INSERT INTO bill" +
-                    "(patientSSN, stayID, insuranceID, roomCost, treatmentCost, subtotal, insuranceCoverageAmount, taxAmount, totalDue) VALUES ('" +
+                    "(patientSSN, stayID, insuranceID, roomCost, treatmentCost, subtotal, insCoverageAmount, taxAmount, totalDue) VALUES ('" +
                     bill.getPatientSSN() +"', "+
-                    bill.getStayID() +", "+
-                    bill.getInsuranceID() +", "+
+                    bill.getStayID() +", '"+
+                    bill.getInsuranceID() +"', "+
                     bill.getRoomCost() +", "+
                     bill.getTreatmentCost() +", "+
                     bill.getSubtotal() +", "+
@@ -78,6 +85,7 @@ public class BillImpl extends DBConn {
     }
 
     public Bill getBillByStayID(int stayID) {
+    	System.out.println("get bill");
         Bill bill = null;
         try {
             Connection conn = createConn();
@@ -92,7 +100,7 @@ public class BillImpl extends DBConn {
                 rs.getDouble("roomCost"),
                 rs.getDouble("treatmentCost"),
                 rs.getDouble("subtotal"),
-                rs.getDouble("insuranceCoverageAmount"),
+                rs.getDouble("insCoverageAmount"),
                 rs.getDouble("taxAmount"),
                 rs.getDouble("totalDue"));
             }
@@ -117,7 +125,7 @@ public class BillImpl extends DBConn {
                 rs.getDouble("roomCost"),
                 rs.getDouble("treatmentCost"),
                 rs.getDouble("subtotal"),
-                rs.getDouble("insuranceCoverageAmount"),
+                rs.getDouble("insCoverageAmount"),
                 rs.getDouble("taxAmount"),
                 rs.getDouble("totalDue"));
                 bills.add(bill);
@@ -130,16 +138,17 @@ public class BillImpl extends DBConn {
 
     //unsure if this should even exist
     public void updateBill(Bill bill) {
+    	System.out.println("update bill");
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
             String sql = "UPDATE bill SET " +
                     "patientSSN='" + bill.getPatientSSN() +"', "+
-                    "insuranceID=" + bill.getInsuranceID() +", "+
+                    "insuranceID='" + bill.getInsuranceID() +"', "+
                     "roomCost=" + bill.getRoomCost() +", "+
                     "treatmentCost=" + bill.getTreatmentCost() +", "+
                     "subtotal=" + bill.getSubtotal() +", "+
-                    "insuranceCoverageAmount=" + bill.getInsuranceCoverageAmount() +", "+
+                    "insCoverageAmount=" + bill.getInsuranceCoverageAmount() +", "+
                     "taxAmount=" + bill.getTaxAmount() +", "+
                     "totalDue=" + bill.getTotalDue() +
                     " WHERE stayID=" + bill.getStayID();

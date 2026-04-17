@@ -8,6 +8,7 @@
 <%
 String isNew = request.getParameter("new");
 StayImpl stayDAO= new StayImpl();
+BillImpl billDAO = new BillImpl();
 RoomImpl roomDAO = new RoomImpl();
 DepartmentImpl deptDAO = new DepartmentImpl();
 StaffImpl staffDAO = new StaffImpl();
@@ -53,10 +54,11 @@ if (isNew != null){
 	if (request.getParameter("auto") != null){
 		AutoRoomAssign autoAssign = new AutoRoomAssign(ssn.toString(), Integer.parseInt(provider.toString()), conditions);
 		roomidint = autoAssign.chooseRoom().getRoomID();
+		System.out.println(roomidint);
 	}
 	
 	if (isNew.equals("new")){
-		Stay thisStay = new Stay(ssn.toString(), start.toString(), start.toString(), 0, roomidint, Integer.parseInt(provider.toString()), conditions, null);
+		Stay thisStay = new Stay(ssn.toString(), start.toString(), start.toString(), 0, roomidint, Integer.parseInt(provider.toString()), conditions, "");
 		stayDAO.addStay(thisStay);
 		roomDAO.updateRoomStatus(roomidint, "Occupied");
 	} else {
@@ -263,7 +265,7 @@ if (isNew != null){
                                 "<td>"+s.getStartDate()+"</td>" +
                                 "<td>"+s.getEndDate()+"</td>" +
                                 "<td>"+s.getLength()+"</td>" +
-                                "<td class=\"bill\"><form action=\"bills.jsp\" method=\"post\"><button class=\"sbill-button\" type=\"submit\" value=\""+s.getStayID()+"\" name=\"sbill\">View Bill</button></form></td>" +
+                                "<td class=\"bill\"><form action=\"bills.jsp\" method=\"post\"><button class=\"sbill-button\" type=\"submit\" value=\""+s.getStayID()+"\" name=\"stayid\">View Bill</button></form></td>" +
                                 "<td class=\"update\"><form action=\"stayform.jsp\" method=\"post\"><button class=\"update-button\" type=\"submit\" value=\""+s.getStayID()+"\" name=\"update\">Update</button></form></td>" +
                                 "<td class=\"update\"><form method=\"post\"><button class=\"update-button\" type=\"submit\" value=\""+s.getStayID()+"\" name=\"update\">End Stay</button></form></td>" +
                                 "<td class=\"delete\"><form method=\"post\"><button class=\"delete-button\" type=\"submit\" value=\""+s.getStayID()+"\" name=\"delete\">Delete</button></form></td>" +
