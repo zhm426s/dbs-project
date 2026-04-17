@@ -2,19 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ page import="hms.*" %>
 <%@ page import="java.util.*" %>
-<%@ page import="java.time.LocalDate" %>
-<%@ page import="java.time.temporal.ChronoUnit" %>
-
-<%! boolean compareDates(LocalDate date1, LocalDate date2, int comparison, int mode){
-	long yearDiff = ChronoUnit.YEARS.between(date1, date2);
-	boolean result = false;
-	if (mode == 0){
-		result = yearDiff <= comparison;
-	} else {
-		result = yearDiff >= comparison;
-	}
-	return result;
-} %>
 
 <%
 String isNew = request.getParameter("new");
@@ -66,8 +53,6 @@ if (isNew != null){
 	if (isNew.equals("new")){
 		patientDAO.addPatient(thisPatient);
 	} else {
-		out.print(thisPatient.getEmail());
-		out.print(thisPatient.getSsn());
 		patientDAO.updatePatient(thisPatient);
 		if (!insID.equals("")){
 			InsurancePolicy insP = new InsurancePolicy(insID, insurer.toString(), insPercent, insPlan);

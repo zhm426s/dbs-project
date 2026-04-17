@@ -80,7 +80,7 @@
                     </div>
                     <div class="edit-field">
                         <label for="name">Name:</label><br>
-                        <input type="text" id="name" name="name" value="<%=name %>"  placeholder="e.g. John, Doe, John Doe" required>
+                        <input type="text" id="name" name="name" value="<%=name %>" placeholder="e.g. John, Doe, John Doe" required>
                     </div>
                     <div class="edit-field">
                         <label for="dob">Date of Birth (If unknown, enter estimated):</label><br>
