@@ -1,6 +1,6 @@
 public class Room {
     
-    // roomID is autoincrement so it is omitted
+    private int roomID; // autoincrement
     private String building;
     private int floorNo;
     private int roomNo;
@@ -8,6 +8,7 @@ public class Room {
     private double dailyRate;
     private int deptID;
 
+    // for use in adding
     public Room(String building, int floorNo, int roomNo, String status, double dailyRate, int deptID) {
         this.building = building;
         this.floorNo = floorNo;
@@ -17,6 +18,24 @@ public class Room {
         this.deptID = deptID;
     }
 
+    public Room(int roomID, String building, int floorNo, int roomNo, String status, double dailyRate, int deptID) {
+        this.roomID = roomID;
+        this.building = building;
+        this.floorNo = floorNo;
+        this.roomNo = roomNo;
+        this.status = status;
+        this.dailyRate = dailyRate;
+        this.deptID = deptID;
+    }
+
+    public int getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(int roomID) {
+        this.roomID = roomID;
+    }
+    
     public String getBuilding() {
         return building;
     }

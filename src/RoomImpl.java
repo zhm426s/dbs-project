@@ -20,16 +20,17 @@ public class RoomImpl extends DBConn {
         }
     }
 
-    public Room getRoom(int roomNo) {
-        String sql = "SELECT * FROM room WHERE roomNo = ?";
+    public Room getRoom(int roomID) {
+        String sql = "SELECT * FROM room WHERE roomID = ?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, roomNo);
+            stmt.setInt(1, roomID);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
                 return new Room(
+                    rs.getInt("roomID"),
                     rs.getString("building"),
                     rs.getInt("floorNo"),
                     rs.getInt("roomNo"),
@@ -53,6 +54,7 @@ public class RoomImpl extends DBConn {
 
             while (rs.next()) {
                 rooms.add(new Room(
+                    rs.getInt("roomID"),
                     rs.getString("building"),
                     rs.getInt("floorNo"),
                     rs.getInt("roomNo"),
@@ -68,16 +70,17 @@ public class RoomImpl extends DBConn {
     }
 
     public void updateRoom(Room room) {
-        String sql = "UPDATE room SET building=?, floorNo=?, status=?, dailyRate=?, deptID=? WHERE roomNo=?";
+        String sql = "UPDATE room SET building=?, floorNo=?, roomNo=?, status=?, dailyRate=?, deptID=? WHERE roomID=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, room.getBuilding());
             stmt.setInt(2, room.getFloorNo());
-            stmt.setString(3, room.getStatus());
-            stmt.setDouble(4, room.getDailyRate());
-            stmt.setInt(5, room.getDeptID());
-            stmt.setInt(6, room.getRoomNo());
+            stmt.setInt(3, room.getRoomNo());
+            stmt.setString(4, room.getStatus());
+            stmt.setDouble(5, room.getDailyRate());
+            stmt.setInt(6, room.getDeptID());
+            stmt.setInt(7, room.getRoomID());
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -86,13 +89,13 @@ public class RoomImpl extends DBConn {
     }
 
     // specifically for changing the status and nothing more
-    public void updateRoomStatus(int roomNo, String status) {
-        String sql = "UPDATE room SET status=? WHERE roomNo=?";
+    public void updateRoomStatus(int roomID, String newStatus) {
+        String sql = "UPDATE room SET status=? WHERE roomID=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, status);
-            stmt.setInt(2, roomNo);
+            stmt.setString(1, newStatus);
+            stmt.setInt(2, roomID);
 
             stmt.executeUpdate();
         } catch (SQLException e) {
@@ -100,12 +103,12 @@ public class RoomImpl extends DBConn {
         }
     }
 
-    public void deleteRoom(int roomNo) {
-        String sql = "DELETE FROM room WHERE roomNo=?";
+    public void deleteRoom(int roomID) {
+        String sql = "DELETE FROM room WHERE roomID=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setInt(1, roomNo);
+            stmt.setInt(1, roomID);
             stmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

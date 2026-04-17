@@ -5,7 +5,15 @@ public class Treatment {
     private String description;
     private double baseCost;
 
+    // for use in adding
     public Treatment(String treatmentName, String description, double baseCost) {
+        this.treatmentName = treatmentName;
+        this.description = description;
+        this.baseCost = baseCost;
+    }
+
+    public Treatment(int treatmentID, String treatmentName, String description, double baseCost) {
+        this.treatmentID = treatmentID;
         this.treatmentName = treatmentName;
         this.description = description;
         this.baseCost = baseCost;

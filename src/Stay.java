@@ -3,25 +3,28 @@ import java.util.Date;
 public class Stay {
     
     private int stayID;
-    private int patientSSN;
+    private String patientSSN;
     private Date startDate;
     private Date endDate;
     private int length;
     private int roomUsed;
     private int careProvider;
     private String conditions;
+    private String treatments;
 
     // for use in adding (stayid is autoincrement)
-    public Stay(int patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions) {
+    public Stay(String patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions, String treatments) {
         this.patientSSN = patientSSN;
         this.startDate = startDate;
         this.endDate = endDate;
         this.length = length;
         this.roomUsed = roomUsed;
         this.careProvider = careProvider;
+        this.conditions = conditions;
+        this.treatments = treatments;
     }
 
-    public Stay(int stayID, int patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions) {
+    public Stay(int stayID, String patientSSN, Date startDate, Date endDate, int length, int roomUsed, int careProvider, String conditions, String treatments) {
         this.stayID = stayID;
         this.patientSSN = patientSSN;
         this.startDate = startDate;
@@ -29,6 +32,8 @@ public class Stay {
         this.length = length;
         this.roomUsed = roomUsed;
         this.careProvider = careProvider;
+        this.conditions = conditions;
+        this.treatments = treatments;
     }
 
     public int getStayID() {
@@ -39,11 +44,11 @@ public class Stay {
         this.stayID = stayID;
     }
 
-    public int getPatientSSN() {
+    public String getPatientSSN() {
         return patientSSN;
     }
 
-    public void setPatientSSN(int patientSSN) {
+    public void setPatientSSN(String patientSSN) {
         this.patientSSN = patientSSN;
     }
 
@@ -93,5 +98,13 @@ public class Stay {
 
     public void setConditions(String conditions) {
         this.conditions = conditions;
+    }
+
+    public String getTreatments() {
+        return treatments;
+    }
+
+    public void setTreatments(String treatments) {
+        this.treatments = treatments;
     }
 }

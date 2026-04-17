@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class StayImpl extends DBConn {
     public void addStay(Stay stay) {
         String[] conditionArr = stay.getConditions().split(" *,+ *");
+        String[] treatmentArr = stay.getTreatments().split(" *,+ *");
         try {
             Connection conn = createConn();
             Statement stmt = conn.createStatement();
@@ -35,36 +36,24 @@ public class StayImpl extends DBConn {
                 addConditionStmt.executeUpdate(addCondition);
                 System.out.println("Added condition.");
             }
+
+            // add treatments
+            for (i = 0; i < treatmentArr.length; i++) {
+                Statement addTreatmentStmt = conn.createStatement();
+                String addTreatment = "INSERT INTO staytreatment" +
+                "(stayID, treatmentID)" +
+                "VALUES ("+ stay.getStayID() +", '"+ treatmentArr[i] +"')";
+                addTreatmentStmt.executeUpdate(addTreatment);
+                System.out.println("Added treatment.");
+            }
             System.out.println("Added stay.");
         } catch (SQLException e) {
             System.out.println("SQL Err: " + e.getMessage());
         }
-    }
 
-    // i figured this would be better since stayid has no actual meaning
-    // it can return multiple/null, not sure if that is like a catastrophe or not
-    public ArrayList<Stay> getStayBySSN(int patientSSN) {
-        ArrayList<Stay> stays = new ArrayList<>();
-        try {
-            Connection conn = createConn();
-            Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM stay WHERE patientSSN = " + patientSSN;
-            ResultSet rs = stmt.executeQuery(sql);
-            while (rs.next()) {
-                Stay stay = new Stay(rs.getInt("stayID"),
-                rs.getInt("patientSSN"),
-                rs.getDate("startDate"),
-                rs.getDate("endDate"),
-                rs.getInt("length"),
-                rs.getInt("roomUsed"),
-                rs.getInt("careProvider"),
-                getStayConditions(rs.getInt("stayID")));
-                stays.add(stay);
-            }
-         } catch (SQLException e) {
-            System.out.println("SQL Err: " + e.getMessage());
-        }
-        return stays;
+        BillImpl billDAO = new BillImpl();
+        Bill stayBill = billDAO.calculateBill(stay);
+        billDAO.addBill(stayBill);
     }
 
     public String getStayConditions(int stayID) {
@@ -86,6 +75,25 @@ public class StayImpl extends DBConn {
         return conditions.toString();
     }
 
+    public String getStayTreatments(int stayID) {
+        StringBuilder treatments = new StringBuilder();
+        String sql = "SELECT * FROM staytreatment WHERE stayID = " + stayID;
+        try (Connection conn = createConn();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                treatments.append(rs.getString("treatmentID")).append(", ");
+            }
+            if (treatments.length() > 0) {
+                treatments.setLength(treatments.length() - 2); // remove trailing comma and space
+            }
+        } catch (SQLException e) {
+            System.out.println("SQL Err: " + e.getMessage());
+        }
+        return treatments.toString();
+    }
+
     public ArrayList<Stay> getAllStays() {
         ArrayList<Stay> stays = new ArrayList<>();
         try {
@@ -95,13 +103,14 @@ public class StayImpl extends DBConn {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Stay stay = new Stay(rs.getInt("stayID"),
-                rs.getInt("patientSSN"),
+                rs.getString("patientSSN"),
                 rs.getDate("startDate"),
                 rs.getDate("endDate"),
                 rs.getInt("length"),
                 rs.getInt("roomUsed"),
                 rs.getInt("careProvider"),
-                getStayConditions(rs.getInt("stayID")));
+                getStayConditions(rs.getInt("stayID")),
+                getStayTreatments(rs.getInt("stayID")));
                 stays.add(stay);
             }
         } catch (SQLException e) {
@@ -128,6 +137,7 @@ public class StayImpl extends DBConn {
         }
 
         updateStayConditions(stay);
+        updateStayTreatments(stay);
     }
 
     // do not call directly
@@ -154,6 +164,30 @@ public class StayImpl extends DBConn {
         }
     }
 
+    // do not call directly
+    public void updateStayTreatments(Stay stay) {
+        String[] treatmentArr = stay.getTreatments().split(" *,+ *");
+        String sql = "DELETE FROM staytreatment WHERE stayID=?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, String.valueOf(stay.getStayID()));
+            stmt.executeUpdate();
+
+            int i;
+            for (i = 0; i < treatmentArr.length; i++) {
+                Statement addTreatmentStmt = conn.createStatement();
+                String addTreatment = "INSERT INTO staytreatment" +
+                "(stayID, treatmentID)" +
+                "VALUES ('"+ stay.getStayID() +"', '"+ treatmentArr[i] +"')";
+                addTreatmentStmt.executeUpdate(addTreatment);
+                System.out.println("Updated treatment.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void deleteStay(int stayID) {
         try {
             Connection conn = createConn();
@@ -168,6 +202,18 @@ public class StayImpl extends DBConn {
 
     public void deleteStayConditions(int stayID) {
         String sql = "DELETE FROM condition_ WHERE stayID=?";
+        try (Connection conn = createConn();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, String.valueOf(stayID));
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteStayTreatments(int stayID) {
+        String sql = "DELETE FROM staytreatment WHERE stayID=?";
         try (Connection conn = createConn();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
